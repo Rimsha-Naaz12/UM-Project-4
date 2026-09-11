@@ -1,3 +1,4 @@
+```python
 from pathlib import Path
 
 import numpy as np
@@ -27,41 +28,196 @@ st.markdown(
     <style>
 
     /* ========================================================
-       GLOBAL APP
+       GLOBAL APPLICATION
        ======================================================== */
 
     .stApp {
         background: linear-gradient(
             135deg,
-            #f7f9fc 0%,
-            #eef3f9 50%,
-            #f8f7fc 100%
+            #f5f7ff 0%,
+            #eef2ff 45%,
+            #f8f9ff 100%
         );
         color: #172033 !important;
     }
 
     .main {
-        padding-top: 0.5rem;
+        background: transparent !important;
     }
 
     .block-container {
-        padding-top: 1.5rem;
-        padding-bottom: 3rem;
-        max-width: 1500px;
+        padding-top: 2rem !important;
+        padding-bottom: 3rem !important;
+        max-width: 1500px !important;
     }
 
-    /* Force readable text everywhere */
+    /* Force readable default text */
 
-    html,
     body,
-    [class*="css"],
-    .stApp,
-    .stMarkdown,
     p,
     span,
+    div,
     label,
-    div {
+    li {
         color: #172033;
+    }
+
+
+    /* ========================================================
+       HEADINGS
+       ======================================================== */
+
+    h1 {
+        color: #182848 !important;
+        font-weight: 800 !important;
+        font-size: 2.5rem !important;
+        letter-spacing: -0.5px;
+    }
+
+    h2 {
+        color: #243b6b !important;
+        font-weight: 750 !important;
+        margin-top: 1.5rem !important;
+    }
+
+    h3 {
+        color: #344a7c !important;
+        font-weight: 700 !important;
+    }
+
+
+    /* ========================================================
+       HEADER EFFECT
+       ======================================================== */
+
+    .hero-header {
+        padding: 28px 32px;
+        border-radius: 18px;
+        margin-bottom: 25px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #172554 0%,
+                #312e81 45%,
+                #4f46e5 100%
+            );
+
+        box-shadow:
+            0 12px 30px rgba(37, 51, 112, 0.20);
+
+        color: white !important;
+    }
+
+    .hero-header h1 {
+        color: white !important;
+        margin-bottom: 6px;
+    }
+
+    .hero-header p {
+        color: #e0e7ff !important;
+        font-size: 1.05rem;
+        margin: 0;
+    }
+
+
+    /* ========================================================
+       INFORMATION BOX
+       ======================================================== */
+
+    .info-box {
+        padding: 20px 22px;
+        border-radius: 14px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #ffffff,
+                #f3f5ff
+            ) !important;
+
+        border: 1px solid #d9def5 !important;
+
+        box-shadow:
+            0 5px 18px rgba(41, 51, 100, 0.08);
+
+        margin-bottom: 25px;
+
+        color: #172033 !important;
+    }
+
+    .info-box strong {
+        color: #312e81 !important;
+        font-size: 1.1rem;
+    }
+
+    .info-box p,
+    .info-box div {
+        color: #374151 !important;
+    }
+
+
+    /* ========================================================
+       KPI CARDS
+       ======================================================== */
+
+    [data-testid="stMetric"] {
+        background:
+            linear-gradient(
+                145deg,
+                #ffffff,
+                #f8f9ff
+            ) !important;
+
+        border: 1px solid #dce1f2 !important;
+
+        padding: 20px !important;
+
+        border-radius: 16px !important;
+
+        min-height: 125px;
+
+        box-shadow:
+            0 7px 20px rgba(31, 41, 91, 0.08) !important;
+
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+    [data-testid="stMetric"]:hover {
+        transform: translateY(-3px);
+
+        box-shadow:
+            0 12px 28px rgba(31, 41, 91, 0.14) !important;
+    }
+
+    [data-testid="stMetricLabel"] {
+        color: #64748b !important;
+        font-weight: 600 !important;
+        font-size: 0.9rem !important;
+    }
+
+    [data-testid="stMetricLabel"] * {
+        color: #64748b !important;
+    }
+
+    [data-testid="stMetricValue"] {
+        color: #172554 !important;
+        font-weight: 800 !important;
+    }
+
+    [data-testid="stMetricValue"] * {
+        color: #172554 !important;
+    }
+
+    [data-testid="stMetricDelta"] {
+        color: #4f46e5 !important;
+        font-weight: 600 !important;
+    }
+
+    [data-testid="stMetricDelta"] * {
+        color: #4f46e5 !important;
     }
 
 
@@ -74,11 +230,11 @@ st.markdown(
             linear-gradient(
                 180deg,
                 #111827 0%,
-                #172554 45%,
+                #172554 48%,
                 #312e81 100%
             ) !important;
 
-        border-right: 1px solid rgba(255,255,255,0.12);
+        border-right: 1px solid #303a6b;
     }
 
     [data-testid="stSidebar"] * {
@@ -92,226 +248,36 @@ st.markdown(
     }
 
     [data-testid="stSidebar"] p {
-        color: #dbeafe !important;
+        color: #cbd5e1 !important;
     }
 
     [data-testid="stSidebar"] label {
-        color: #f1f5f9 !important;
+        color: #e2e8f0 !important;
         font-weight: 600 !important;
     }
 
-    [data-testid="stSidebar"] .stMultiSelect div,
-    [data-testid="stSidebar"] .stSelectbox div {
-        color: #172033 !important;
-    }
+    /* Sidebar input containers */
 
     [data-testid="stSidebar"] [data-baseweb="select"] {
         background-color: #ffffff !important;
-        border-radius: 8px !important;
+        border-radius: 9px !important;
     }
 
     [data-testid="stSidebar"] [data-baseweb="select"] * {
         color: #172033 !important;
     }
 
-    [data-testid="stSidebar"] .stMultiSelect span {
+    [data-testid="stSidebar"] input {
         color: #172033 !important;
     }
 
-    [data-testid="stSidebar"] hr {
-        border-color: rgba(255,255,255,0.15) !important;
-    }
-
-
-    /* ========================================================
-       MAIN HEADINGS
-       ======================================================== */
-
-    h1 {
-        color: #172554 !important;
-        font-weight: 800 !important;
-        font-size: 2.35rem !important;
-        letter-spacing: -0.5px;
-    }
-
-    h2 {
-        color: #1e3a8a !important;
-        font-weight: 750 !important;
-        margin-top: 1.5rem !important;
-    }
-
-    h3 {
-        color: #312e81 !important;
-        font-weight: 700 !important;
-    }
-
-
-    /* ========================================================
-       TITLE AREA
-       ======================================================== */
-
-    .dashboard-title {
-        background:
-            linear-gradient(
-                135deg,
-                #172554 0%,
-                #1d4ed8 45%,
-                #7c3aed 100%
-            );
-
-        padding: 30px 35px;
-        border-radius: 18px;
-        margin-bottom: 22px;
-
-        box-shadow:
-            0 10px 30px rgba(30, 64, 175, 0.18);
-    }
-
-    .dashboard-title h1 {
-        color: #ffffff !important;
-        margin: 0;
-        font-size: 2.4rem !important;
-    }
-
-    .dashboard-title p {
-        color: #dbeafe !important;
-        margin-top: 8px;
-        font-size: 1.05rem;
-    }
-
-
-    /* ========================================================
-       INFO BOX
-       ======================================================== */
-
-    .info-box {
-        padding: 20px 22px;
-        border-radius: 14px;
-
-        background:
-            linear-gradient(
-                135deg,
-                #eff6ff,
-                #eef2ff
-            ) !important;
-
-        border: 1px solid #bfdbfe !important;
-
-        box-shadow:
-            0 5px 18px rgba(30,64,175,0.08);
-
-        margin-bottom: 25px;
-
+    [data-testid="stSidebar"] [role="option"] {
         color: #172033 !important;
+        background-color: white !important;
     }
 
-    .info-box strong {
-        color: #1d4ed8 !important;
-        font-size: 1.05rem;
-    }
-
-    .info-box p,
-    .info-box span,
-    .info-box div {
-        color: #263449 !important;
-    }
-
-
-    /* ========================================================
-       KPI CARDS
-       ======================================================== */
-
-    [data-testid="stMetric"] {
-        background:
-            linear-gradient(
-                145deg,
-                #ffffff 0%,
-                #f8fafc 100%
-            ) !important;
-
-        border: 1px solid #dbe3ef !important;
-
-        padding: 20px !important;
-
-        border-radius: 15px !important;
-
-        min-height: 125px;
-
-        box-shadow:
-            0 7px 22px rgba(15,23,42,0.08) !important;
-
-        transition:
-            transform 0.2s ease,
-            box-shadow 0.2s ease;
-    }
-
-    [data-testid="stMetric"]:hover {
-        transform: translateY(-3px);
-
-        box-shadow:
-            0 12px 28px rgba(30,64,175,0.13) !important;
-    }
-
-    [data-testid="stMetricLabel"] {
-        color: #475569 !important;
-        font-weight: 600 !important;
-    }
-
-    [data-testid="stMetricLabel"] * {
-        color: #475569 !important;
-    }
-
-    [data-testid="stMetricValue"] {
-        color: #172554 !important;
-        font-weight: 800 !important;
-    }
-
-    [data-testid="stMetricValue"] * {
-        color: #172554 !important;
-    }
-
-    [data-testid="stMetricDelta"] {
-        color: #2563eb !important;
-        font-weight: 600 !important;
-    }
-
-    [data-testid="stMetricDelta"] * {
-        color: #2563eb !important;
-    }
-
-
-    /* ========================================================
-       SECTION DIVIDERS
-       ======================================================== */
-
-    hr {
-        border: none !important;
-        height: 2px !important;
-
-        background:
-            linear-gradient(
-                90deg,
-                transparent,
-                #93c5fd,
-                #a78bfa,
-                transparent
-            ) !important;
-
-        margin: 35px 0 !important;
-    }
-
-
-    /* ========================================================
-       STREAMLIT TEXT
-       ======================================================== */
-
-    .stMarkdown p,
-    .stMarkdown li {
-        color: #263449 !important;
-    }
-
-    .stCaption {
-        color: #64748b !important;
+    [data-testid="stSidebar"] [role="option"]:hover {
+        background-color: #eef2ff !important;
     }
 
 
@@ -321,12 +287,164 @@ st.markdown(
 
     [data-testid="stMultiSelect"] label,
     [data-testid="stSelectbox"] label {
-        color: #334155 !important;
+        color: #172033 !important;
         font-weight: 600 !important;
     }
 
     [data-baseweb="select"] {
+        background-color: white !important;
         border-radius: 9px !important;
+    }
+
+    [data-baseweb="select"] * {
+        color: #172033 !important;
+    }
+
+
+    /* ========================================================
+       MULTISELECT TAGS
+       ======================================================== */
+
+    [data-baseweb="tag"] {
+        background-color: #e0e7ff !important;
+        border-radius: 6px !important;
+    }
+
+    [data-baseweb="tag"] span {
+        color: #312e81 !important;
+        font-weight: 600 !important;
+    }
+
+
+    /* ========================================================
+       DATAFRAMES
+       ======================================================== */
+
+    [data-testid="stDataFrame"] {
+        background-color: white !important;
+        border: 1px solid #dce1f2 !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+    }
+
+
+    /* ========================================================
+       EXPANDERS
+       ======================================================== */
+
+    [data-testid="stExpander"] {
+        background-color: #ffffff !important;
+
+        border: 1px solid #dce1f2 !important;
+
+        border-radius: 12px !important;
+
+        box-shadow:
+            0 4px 14px rgba(31, 41, 91, 0.06);
+    }
+
+    [data-testid="stExpander"] summary {
+        color: #172554 !important;
+        font-weight: 700 !important;
+    }
+
+    [data-testid="stExpander"] summary p {
+        color: #172554 !important;
+        font-weight: 700 !important;
+    }
+
+    [data-testid="stExpander"] div {
+        color: #172033 !important;
+    }
+
+
+    /* ========================================================
+       ALERTS
+       ======================================================== */
+
+    [data-testid="stAlert"] {
+        border-radius: 10px !important;
+    }
+
+    [data-testid="stAlert"] p,
+    [data-testid="stAlert"] div {
+        color: #172033 !important;
+    }
+
+
+    /* ========================================================
+       RISK CARDS
+       ======================================================== */
+
+    .risk-high {
+        padding: 15px 18px;
+        border-radius: 12px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #fff1f2,
+                #ffe4e6
+            ) !important;
+
+        border-left: 5px solid #e11d48;
+
+        color: #881337 !important;
+
+        box-shadow:
+            0 4px 12px rgba(225, 29, 72, 0.08);
+    }
+
+    .risk-high p {
+        color: #881337 !important;
+    }
+
+
+    .risk-medium {
+        padding: 15px 18px;
+        border-radius: 12px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #fffbeb,
+                #fef3c7
+            ) !important;
+
+        border-left: 5px solid #f59e0b;
+
+        color: #78350f !important;
+
+        box-shadow:
+            0 4px 12px rgba(245, 158, 11, 0.08);
+    }
+
+    .risk-medium p {
+        color: #78350f !important;
+    }
+
+
+    .risk-low {
+        padding: 15px 18px;
+        border-radius: 12px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #f0fdf4,
+                #dcfce7
+            ) !important;
+
+        border-left: 5px solid #16a34a;
+
+        color: #14532d !important;
+
+        box-shadow:
+            0 4px 12px rgba(22, 163, 74, 0.08);
+    }
+
+    .risk-low p {
+        color: #14532d !important;
     }
 
 
@@ -338,231 +456,63 @@ st.markdown(
         background:
             linear-gradient(
                 135deg,
-                #2563eb,
+                #4f46e5,
                 #7c3aed
             ) !important;
 
-        color: #ffffff !important;
+        color: white !important;
 
         border: none !important;
 
         border-radius: 9px !important;
 
-        font-weight: 700 !important;
+        font-weight: 600 !important;
 
         padding: 8px 18px !important;
 
         box-shadow:
-            0 5px 15px rgba(37,99,235,0.22);
+            0 4px 12px rgba(79, 70, 229, 0.25);
     }
 
     .stButton button:hover {
         background:
             linear-gradient(
                 135deg,
-                #1d4ed8,
+                #4338ca,
                 #6d28d9
             ) !important;
 
-        color: #ffffff !important;
+        color: white !important;
     }
 
 
     /* ========================================================
-       DATAFRAMES
+       CHECKBOXES
        ======================================================== */
 
-    [data-testid="stDataFrame"] {
-        border-radius: 12px !important;
-        border: 1px solid #dbe3ef !important;
-
-        box-shadow:
-            0 5px 18px rgba(15,23,42,0.06);
+    [data-testid="stCheckbox"] label {
+        color: #172033 !important;
     }
 
 
     /* ========================================================
-       EXPANDERS
+       DIVIDERS
        ======================================================== */
 
-    [data-testid="stExpander"] {
-        background: #ffffff !important;
+    hr {
+        border: none !important;
 
-        border: 1px solid #dbe3ef !important;
-
-        border-radius: 12px !important;
-
-        box-shadow:
-            0 4px 15px rgba(15,23,42,0.05);
-    }
-
-    [data-testid="stExpander"] summary {
-        color: #1e3a8a !important;
-        font-weight: 700 !important;
-    }
-
-    [data-testid="stExpander"] summary p {
-        color: #1e3a8a !important;
-        font-weight: 700 !important;
-    }
-
-    [data-testid="stExpander"] div {
-        color: #263449 !important;
-    }
-
-
-    /* ========================================================
-       ALERTS
-       ======================================================== */
-
-    [data-testid="stAlert"] {
-        border-radius: 11px !important;
-    }
-
-    [data-testid="stAlert"] p {
-        color: #263449 !important;
-    }
-
-
-    /* ========================================================
-       RISK CARDS
-       ======================================================== */
-
-    .risk-high {
-        padding: 18px;
-        border-radius: 12px;
+        height: 1px !important;
 
         background:
             linear-gradient(
-                135deg,
-                #fff1f2,
-                #ffe4e6
+                90deg,
+                transparent,
+                #c7d2fe,
+                transparent
             ) !important;
 
-        border-left: 6px solid #e11d48;
-
-        color: #881337 !important;
-
-        box-shadow:
-            0 5px 15px rgba(225,29,72,0.10);
-    }
-
-    .risk-high p,
-    .risk-high strong {
-        color: #881337 !important;
-    }
-
-
-    .risk-medium {
-        padding: 18px;
-        border-radius: 12px;
-
-        background:
-            linear-gradient(
-                135deg,
-                #fffbeb,
-                #fef3c7
-            ) !important;
-
-        border-left: 6px solid #f59e0b;
-
-        color: #78350f !important;
-
-        box-shadow:
-            0 5px 15px rgba(245,158,11,0.10);
-    }
-
-    .risk-medium p,
-    .risk-medium strong {
-        color: #78350f !important;
-    }
-
-
-    .risk-low {
-        padding: 18px;
-        border-radius: 12px;
-
-        background:
-            linear-gradient(
-                135deg,
-                #f0fdf4,
-                #dcfce7
-            ) !important;
-
-        border-left: 6px solid #16a34a;
-
-        color: #14532d !important;
-
-        box-shadow:
-            0 5px 15px rgba(22,163,74,0.10);
-    }
-
-    .risk-low p,
-    .risk-low strong {
-        color: #14532d !important;
-    }
-
-
-    /* ========================================================
-       PLOTLY CONTAINERS
-       ======================================================== */
-
-    .stPlotlyChart {
-        background: #ffffff;
-
-        border-radius: 14px;
-
-        padding: 8px;
-
-        box-shadow:
-            0 5px 18px rgba(15,23,42,0.06);
-
-        border: 1px solid #e2e8f0;
-    }
-
-
-    /* ========================================================
-       DATASET INFO CARDS
-       ======================================================== */
-
-    .dataset-card {
-        background: #ffffff;
-
-        padding: 20px;
-
-        border-radius: 14px;
-
-        border: 1px solid #dbe3ef;
-
-        box-shadow:
-            0 5px 18px rgba(15,23,42,0.06);
-    }
-
-
-    /* ========================================================
-       RECOMMENDATIONS
-       ======================================================== */
-
-    .recommendation {
-        background:
-            linear-gradient(
-                135deg,
-                #ffffff,
-                #f8fafc
-            );
-
-        border-left: 5px solid #6366f1;
-
-        padding: 14px 18px;
-
-        margin: 9px 0;
-
-        border-radius: 9px;
-
-        box-shadow:
-            0 3px 12px rgba(15,23,42,0.05);
-
-        color: #263449 !important;
+        margin: 35px 0 !important;
     }
 
 
@@ -575,6 +525,10 @@ st.markdown(
 
         padding: 20px;
 
+        margin-top: 30px;
+
+        border-radius: 14px;
+
         background:
             linear-gradient(
                 135deg,
@@ -582,14 +536,30 @@ st.markdown(
                 #312e81
             );
 
-        border-radius: 14px;
-
-        margin-top: 30px;
+        color: #e0e7ff !important;
     }
 
     .footer-box p {
-        color: #dbeafe !important;
+        color: #e0e7ff !important;
         margin: 4px;
+    }
+
+
+    /* ========================================================
+       SMALL SCREENS
+       ======================================================== */
+
+    @media (max-width: 900px) {
+
+        h1 {
+            font-size: 2rem !important;
+        }
+
+        .block-container {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+
     }
 
     </style>
@@ -745,18 +715,15 @@ CHANNELS = {
             "In-Store Orders",
             "InStore Order Count",
         ],
-
         "revenue": [
             "InStoreRevenue",
             "In-Store Revenue",
         ],
-
         "profit": [
             "InStoreNetProfit",
             "In-Store Net Profit",
         ],
     },
-
 
     "Uber Eats": {
         "orders": [
@@ -764,18 +731,15 @@ CHANNELS = {
             "Uber Eats Orders",
             "UberEats Order Count",
         ],
-
         "revenue": [
             "UberEatsRevenue",
             "Uber Eats Revenue",
         ],
-
         "profit": [
             "UberEatsNetProfit",
             "Uber Eats Net Profit",
         ],
     },
-
 
     "DoorDash": {
         "orders": [
@@ -783,18 +747,15 @@ CHANNELS = {
             "DoorDash Orders",
             "DoorDash Order Count",
         ],
-
         "revenue": [
             "DoorDashRevenue",
             "DoorDash Revenue",
         ],
-
         "profit": [
             "DoorDashNetProfit",
             "DoorDash Net Profit",
         ],
     },
-
 
     "Self-Delivery": {
         "orders": [
@@ -802,12 +763,10 @@ CHANNELS = {
             "Self Delivery Orders",
             "SelfDelivery Order Count",
         ],
-
         "revenue": [
             "SelfDeliveryRevenue",
             "Self Delivery Revenue",
         ],
-
         "profit": [
             "SelfDeliveryNetProfit",
             "Self Delivery Net Profit",
@@ -855,7 +814,6 @@ numeric_columns = [
     monthly_orders_col,
 ]
 
-
 for channel in CHANNELS:
 
     numeric_columns.extend(
@@ -884,62 +842,27 @@ for column in numeric_columns:
 st.sidebar.markdown(
     """
     <div style="
-        text-align:center;
-        padding:10px 0 18px 0;
+        padding: 18px;
+        border-radius: 14px;
+        background: rgba(255,255,255,0.10);
+        margin-bottom: 20px;
     ">
         <div style="
-            font-size:2.2rem;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: white !important;
         ">
-            📊
+            🎛️ Dashboard Filters
         </div>
 
         <div style="
-            font-size:1.35rem;
-            font-weight:800;
-            color:white !important;
+            margin-top: 7px;
+            font-size: 0.88rem;
+            color: #cbd5e1 !important;
         ">
-            SkyCity Analytics
+            Explore channel performance
+            across SkyCity Auckland.
         </div>
-
-        <div style="
-            color:#bfdbfe !important;
-            font-size:0.85rem;
-            margin-top:4px;
-        ">
-            Auckland Restaurant Intelligence
-        </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-
-st.sidebar.markdown("---")
-
-st.sidebar.markdown(
-    """
-    <div style="
-        color:#e0e7ff !important;
-        font-weight:700;
-        font-size:1.05rem;
-        margin-bottom:8px;
-    ">
-        🎛️ Dashboard Filters
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-
-st.sidebar.markdown(
-    """
-    <div style="
-        color:#cbd5e1 !important;
-        font-size:0.88rem;
-        margin-bottom:15px;
-    ">
-        Explore order-channel performance across
-        SkyCity Auckland restaurants and bars.
     </div>
     """,
     unsafe_allow_html=True,
@@ -1082,43 +1005,27 @@ for channel in CHANNELS:
 
         continue
 
-
     order_col = CHANNELS[channel]["orders"]
     revenue_col = CHANNELS[channel]["revenue"]
     profit_col = CHANNELS[channel]["profit"]
 
+    filtered_channel_orders[channel] = (
+        filtered_df[order_col].sum()
+        if order_col
+        else 0
+    )
 
-    if order_col:
+    filtered_channel_revenue[channel] = (
+        filtered_df[revenue_col].sum()
+        if revenue_col
+        else 0
+    )
 
-        filtered_channel_orders[channel] = (
-            filtered_df[order_col].sum()
-        )
-
-    else:
-
-        filtered_channel_orders[channel] = 0
-
-
-    if revenue_col:
-
-        filtered_channel_revenue[channel] = (
-            filtered_df[revenue_col].sum()
-        )
-
-    else:
-
-        filtered_channel_revenue[channel] = 0
-
-
-    if profit_col:
-
-        filtered_channel_profit[channel] = (
-            filtered_df[profit_col].sum()
-        )
-
-    else:
-
-        filtered_channel_profit[channel] = 0
+    filtered_channel_profit[channel] = (
+        filtered_df[profit_col].sum()
+        if profit_col
+        else 0
+    )
 
 
 filtered_total_orders = sum(
@@ -1143,7 +1050,6 @@ aggregator_orders = (
     + filtered_channel_orders.get("DoorDash", 0)
 )
 
-
 if filtered_total_orders > 0:
 
     aggregator_dependence = (
@@ -1163,7 +1069,6 @@ delivery_orders = (
     + filtered_channel_orders.get("Self-Delivery", 0)
 )
 
-
 if filtered_total_orders > 0:
 
     delivery_share = (
@@ -1181,7 +1086,6 @@ in_store_orders = filtered_channel_orders.get(
     "In-Store",
     0
 )
-
 
 if filtered_total_orders > 0:
 
@@ -1226,12 +1130,12 @@ projected_orders = (
 
 
 # ============================================================
-# HEADER
+# HERO HEADER
 # ============================================================
 
 st.markdown(
     """
-    <div class="dashboard-title">
+    <div class="hero-header">
 
         <h1>
             📊 SkyCity Auckland Restaurants & Bars
@@ -1247,6 +1151,10 @@ st.markdown(
 )
 
 
+# ============================================================
+# DASHBOARD OVERVIEW
+# ============================================================
+
 st.markdown(
     """
     <div class="info-box">
@@ -1254,7 +1162,7 @@ st.markdown(
         <strong>✨ Dashboard Overview</strong>
 
         <p>
-            This interactive analytics dashboard analyses
+            This interactive analytics dashboard explores
             order volume, channel market share, revenue,
             profitability, geographic preferences,
             cuisine patterns and aggregator dependency
@@ -1296,7 +1204,7 @@ with kpi2:
 with kpi3:
 
     st.metric(
-        "💵 Net Profit",
+        "💎 Net Profit",
         f"${filtered_total_profit:,.0f}",
     )
 
@@ -1338,7 +1246,7 @@ with kpi6:
 with kpi7:
 
     st.metric(
-        "💳 Calculated AOV",
+        "💵 Calculated AOV",
         f"${calculated_aov:,.2f}",
     )
 
@@ -1346,7 +1254,7 @@ with kpi7:
 with kpi8:
 
     st.metric(
-        "🚀 Next-Month Order Scenario",
+        "📈 Next-Month Order Scenario",
         f"{projected_orders:,.0f}",
         f"{average_growth:.1f}% growth",
     )
@@ -1396,10 +1304,10 @@ with col1:
         text_auto=".2s",
         color="Channel",
         color_discrete_sequence=[
-            "#2563EB",
-            "#7C3AED",
-            "#EC4899",
-            "#14B8A6",
+            "#4f46e5",
+            "#06b6d4",
+            "#8b5cf6",
+            "#10b981",
         ],
     )
 
@@ -1407,7 +1315,8 @@ with col1:
         xaxis_title="Order Channel",
         yaxis_title="Orders",
         template="plotly_white",
-        legend_title="Channel",
+        plot_bgcolor="white",
+        paper_bgcolor="rgba(0,0,0,0)",
     )
 
     st.plotly_chart(
@@ -1423,17 +1332,18 @@ with col2:
         names="Channel",
         values="Orders",
         title="Channel Order Share",
-        hole=0.48,
+        hole=0.45,
         color_discrete_sequence=[
-            "#2563EB",
-            "#7C3AED",
-            "#EC4899",
-            "#14B8A6",
+            "#4f46e5",
+            "#06b6d4",
+            "#8b5cf6",
+            "#10b981",
         ],
     )
 
     fig_share.update_layout(
         template="plotly_white",
+        paper_bgcolor="rgba(0,0,0,0)",
     )
 
     st.plotly_chart(
@@ -1462,16 +1372,17 @@ with col3:
         text_auto=".2s",
         color="Channel",
         color_discrete_sequence=[
-            "#3B82F6",
-            "#8B5CF6",
-            "#F472B6",
-            "#2DD4BF",
+            "#2563eb",
+            "#0891b2",
+            "#7c3aed",
+            "#059669",
         ],
     )
 
     fig_revenue.update_layout(
         template="plotly_white",
-        yaxis_title="Revenue ($)",
+        plot_bgcolor="white",
+        paper_bgcolor="rgba(0,0,0,0)",
     )
 
     st.plotly_chart(
@@ -1490,16 +1401,17 @@ with col4:
         text_auto=".2s",
         color="Channel",
         color_discrete_sequence=[
-            "#22C55E",
-            "#06B6D4",
-            "#6366F1",
-            "#A855F7",
+            "#4338ca",
+            "#0e7490",
+            "#6d28d9",
+            "#047857",
         ],
     )
 
     fig_profit.update_layout(
         template="plotly_white",
-        yaxis_title="Net Profit ($)",
+        plot_bgcolor="white",
+        paper_bgcolor="rgba(0,0,0,0)",
     )
 
     st.plotly_chart(
@@ -1512,18 +1424,13 @@ with col4:
 # PROFIT MARGIN
 # ============================================================
 
-st.subheader("📊 Profit Margin by Channel")
-
-
 channel_data["Profit Margin %"] = np.where(
     channel_data["Revenue"] > 0,
-
     (
         channel_data["Net Profit"]
         / channel_data["Revenue"]
         * 100
     ),
-
     0,
 )
 
@@ -1534,18 +1441,21 @@ fig_margin = px.bar(
     y="Profit Margin %",
     title="Net Profit Margin by Channel",
     text_auto=".1f",
-    color="Profit Margin %",
-    color_continuous_scale=[
-        "#DBEAFE",
-        "#6366F1",
-        "#7C3AED",
+    color="Channel",
+    color_discrete_sequence=[
+        "#4f46e5",
+        "#06b6d4",
+        "#8b5cf6",
+        "#10b981",
     ],
 )
 
 
 fig_margin.update_layout(
-    template="plotly_white",
     yaxis_title="Profit Margin (%)",
+    template="plotly_white",
+    plot_bgcolor="white",
+    paper_bgcolor="rgba(0,0,0,0)",
 )
 
 
@@ -1572,7 +1482,6 @@ if subregion_col:
         if CHANNELS[channel]["orders"]
     ]
 
-
     aggregation_dict = {}
 
     for channel in available_channels:
@@ -1582,7 +1491,6 @@ if subregion_col:
             "sum",
         )
 
-
     subregion_channel = (
         filtered_df
         .groupby(subregion_col)
@@ -1590,13 +1498,11 @@ if subregion_col:
         .reset_index()
     )
 
-
     if not subregion_channel.empty:
 
         st.subheader(
-            "📍 Channel Order Volume by Subregion"
+            "Channel Order Volume by Subregion"
         )
-
 
         melted_subregion = (
             subregion_channel
@@ -1608,7 +1514,6 @@ if subregion_col:
             )
         )
 
-
         fig_subregion = px.bar(
             melted_subregion,
             x=subregion_col,
@@ -1617,31 +1522,29 @@ if subregion_col:
             barmode="group",
             title="Orders by Subregion and Channel",
             color_discrete_sequence=[
-                "#2563EB",
-                "#7C3AED",
-                "#EC4899",
-                "#14B8A6",
+                "#4f46e5",
+                "#06b6d4",
+                "#8b5cf6",
+                "#10b981",
             ],
         )
 
-
         fig_subregion.update_layout(
-            template="plotly_white",
             xaxis_title="Subregion",
             yaxis_title="Orders",
+            template="plotly_white",
+            plot_bgcolor="white",
+            paper_bgcolor="rgba(0,0,0,0)",
         )
-
 
         st.plotly_chart(
             fig_subregion,
             use_container_width=True,
         )
 
-
         st.subheader(
-            "🔥 Subregion Channel Heatmap"
+            "Subregion Channel Heatmap"
         )
-
 
         heatmap_data = (
             subregion_channel
@@ -1649,41 +1552,34 @@ if subregion_col:
             [available_channels]
         )
 
-
         fig_heatmap = px.imshow(
             heatmap_data,
             text_auto=".2s",
             aspect="auto",
             title="Subregion Channel Heatmap",
             color_continuous_scale=[
-                "#EFF6FF",
-                "#93C5FD",
-                "#4F46E5",
-                "#312E81",
+                "#eef2ff",
+                "#6366f1",
+                "#312e81",
             ],
         )
 
-
         fig_heatmap.update_layout(
-            template="plotly_white",
+            paper_bgcolor="rgba(0,0,0,0)",
         )
-
 
         st.plotly_chart(
             fig_heatmap,
             use_container_width=True,
         )
 
-
         st.subheader(
-            "🏆 Dominant Channel by Subregion"
+            "Dominant Channel by Subregion"
         )
-
 
         dominance = heatmap_data.idxmax(
             axis=1
         )
-
 
         dominance_table = pd.DataFrame(
             {
@@ -1694,7 +1590,6 @@ if subregion_col:
                 ).values,
             }
         )
-
 
         st.dataframe(
             dominance_table,
@@ -1726,7 +1621,6 @@ if cuisine_col:
         if CHANNELS[channel]["orders"]
     ]
 
-
     aggregation_dict = {}
 
     for channel in available_channels:
@@ -1736,7 +1630,6 @@ if cuisine_col:
             "sum",
         )
 
-
     cuisine_channel = (
         filtered_df
         .groupby(cuisine_col)
@@ -1744,13 +1637,11 @@ if cuisine_col:
         .reset_index()
     )
 
-
     cuisine_melt = cuisine_channel.melt(
         id_vars=[cuisine_col],
         var_name="Channel",
         value_name="Orders",
     )
-
 
     fig_cuisine = px.bar(
         cuisine_melt,
@@ -1760,38 +1651,35 @@ if cuisine_col:
         barmode="stack",
         title="Cuisine Channel Mix",
         color_discrete_sequence=[
-            "#2563EB",
-            "#7C3AED",
-            "#EC4899",
-            "#14B8A6",
+            "#4f46e5",
+            "#06b6d4",
+            "#8b5cf6",
+            "#10b981",
         ],
     )
 
-
     fig_cuisine.update_layout(
-        template="plotly_white",
         xaxis_title="Cuisine",
         yaxis_title="Orders",
+        template="plotly_white",
+        plot_bgcolor="white",
+        paper_bgcolor="rgba(0,0,0,0)",
     )
-
 
     st.plotly_chart(
         fig_cuisine,
         use_container_width=True,
     )
 
-
     cuisine_pivot = (
         cuisine_channel
         .set_index(cuisine_col)
     )
 
-
     cuisine_dominance = (
         cuisine_pivot
         .idxmax(axis=1)
     )
-
 
     cuisine_table = pd.DataFrame(
         {
@@ -1803,11 +1691,9 @@ if cuisine_col:
         }
     )
 
-
     st.subheader(
-        "🏆 Dominant Channel by Cuisine"
+        "Dominant Channel by Cuisine"
     )
-
 
     st.dataframe(
         cuisine_table,
@@ -1839,7 +1725,6 @@ if segment_col:
         if CHANNELS[channel]["orders"]
     ]
 
-
     aggregation_dict = {}
 
     for channel in available_channels:
@@ -1849,7 +1734,6 @@ if segment_col:
             "sum",
         )
 
-
     segment_channel = (
         filtered_df
         .groupby(segment_col)
@@ -1857,13 +1741,11 @@ if segment_col:
         .reset_index()
     )
 
-
     segment_melt = segment_channel.melt(
         id_vars=[segment_col],
         var_name="Channel",
         value_name="Orders",
     )
-
 
     fig_segment = px.bar(
         segment_melt,
@@ -1873,20 +1755,18 @@ if segment_col:
         barmode="group",
         title="Order Channels by Restaurant Segment",
         color_discrete_sequence=[
-            "#2563EB",
-            "#7C3AED",
-            "#EC4899",
-            "#14B8A6",
+            "#4f46e5",
+            "#06b6d4",
+            "#8b5cf6",
+            "#10b981",
         ],
     )
 
-
     fig_segment.update_layout(
         template="plotly_white",
-        xaxis_title="Restaurant Segment",
-        yaxis_title="Orders",
+        plot_bgcolor="white",
+        paper_bgcolor="rgba(0,0,0,0)",
     )
-
 
     st.plotly_chart(
         fig_segment,
@@ -1911,24 +1791,13 @@ st.header("5. ⚠️ Aggregator Dependency Risk")
 
 st.markdown(
     """
-    <div class="info-box">
+    <div class="risk-high">
 
-        <strong>Risk Classification</strong>
+    <strong>Risk Threshold</strong><br>
 
-        <p>
-            A restaurant is classified as
-            <strong>High Risk</strong> when Uber Eats +
-            DoorDash account for <strong>70% or more</strong>
-            of total monthly orders.
-        </p>
-
-        <p>
-            <strong>High:</strong> ≥ 70%
-            &nbsp;&nbsp; | &nbsp;&nbsp;
-            <strong>Medium:</strong> 50–69.9%
-            &nbsp;&nbsp; | &nbsp;&nbsp;
-            <strong>Low:</strong> &lt; 50%
-        </p>
+    A restaurant is classified as <strong>High Risk</strong>
+    when Uber Eats + DoorDash account for
+    <strong>70% or more</strong> of total monthly orders.
 
     </div>
     """,
@@ -1955,7 +1824,6 @@ if (
         + dependency_df[doordash_col]
     )
 
-
     dependency_df["AggregatorDependence"] = np.where(
         dependency_df[monthly_orders_col] > 0,
 
@@ -1966,23 +1834,17 @@ if (
         0,
     )
 
-
     dependency_df["Risk"] = np.select(
         [
             dependency_df["AggregatorDependence"] >= 70,
-
             dependency_df["AggregatorDependence"] >= 50,
         ],
-
         [
             "High",
-
             "Medium",
         ],
-
         default="Low",
     )
-
 
     high_risk_count = int(
         (
@@ -1991,14 +1853,12 @@ if (
         ).sum()
     )
 
-
     medium_risk_count = int(
         (
             dependency_df["Risk"]
             == "Medium"
         ).sum()
     )
-
 
     low_risk_count = int(
         (
@@ -2007,9 +1867,7 @@ if (
         ).sum()
     )
 
-
     r1, r2, r3 = st.columns(3)
-
 
     with r1:
 
@@ -2018,7 +1876,6 @@ if (
             f"{high_risk_count:,}",
         )
 
-
     with r2:
 
         st.metric(
@@ -2026,14 +1883,12 @@ if (
             f"{medium_risk_count:,}",
         )
 
-
     with r3:
 
         st.metric(
             "🟢 Low Risk",
             f"{low_risk_count:,}",
         )
-
 
     risk_counts = pd.DataFrame(
         {
@@ -2051,7 +1906,6 @@ if (
         }
     )
 
-
     fig_risk = px.bar(
         risk_counts,
         x="Risk",
@@ -2060,70 +1914,57 @@ if (
         text_auto=True,
         color="Risk",
         color_discrete_map={
-            "High": "#E11D48",
-            "Medium": "#F59E0B",
-            "Low": "#16A34A",
+            "High": "#e11d48",
+            "Medium": "#f59e0b",
+            "Low": "#16a34a",
         },
     )
 
-
     fig_risk.update_layout(
         template="plotly_white",
+        plot_bgcolor="white",
+        paper_bgcolor="rgba(0,0,0,0)",
     )
-
 
     st.plotly_chart(
         fig_risk,
         use_container_width=True,
     )
 
-
     # ========================================================
     # RESTAURANT RISK TABLE
     # ========================================================
 
     st.subheader(
-        "🔎 Restaurants with Highest Aggregator Dependence"
+        "Restaurants with Highest Aggregator Dependence"
     )
-
 
     display_columns = []
 
-
     if restaurant_id_col:
-
         display_columns.append(
             restaurant_id_col
         )
 
-
     if restaurant_name_col:
-
         display_columns.append(
             restaurant_name_col
         )
 
-
     if cuisine_col:
-
         display_columns.append(
             cuisine_col
         )
 
-
     if segment_col:
-
         display_columns.append(
             segment_col
         )
 
-
     if subregion_col:
-
         display_columns.append(
             subregion_col
         )
-
 
     display_columns.extend(
         [
@@ -2134,14 +1975,12 @@ if (
         ]
     )
 
-
     display_columns = [
         column
         for column in display_columns
         if column
         and column in dependency_df.columns
     ]
-
 
     risk_table = (
         dependency_df[
@@ -2152,7 +1991,6 @@ if (
             ascending=False,
         )
     )
-
 
     st.dataframe(
         risk_table.head(100),
@@ -2181,18 +2019,14 @@ st.markdown(
     """
     <div class="info-box">
 
-        <strong>📐 Diversification Method</strong>
+    The Channel Diversification Score uses normalized
+    Shannon entropy across the four order channels.
 
-        <p>
-            The Channel Diversification Score uses normalized
-            Shannon entropy across the four order channels.
-        </p>
+    <br><br>
 
-        <p>
-            <strong>0 = highly concentrated</strong>
-            &nbsp;&nbsp; | &nbsp;&nbsp;
-            <strong>100 = highly diversified</strong>
-        </p>
+    <strong>0 = Highly Concentrated</strong>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <strong>100 = Highly Diversified</strong>
 
     </div>
     """,
@@ -2222,11 +2056,9 @@ if (
         ]
     )
 
-
     totals = channel_values.sum(
         axis=1
     )
-
 
     proportions = np.divide(
         channel_values,
@@ -2238,7 +2070,6 @@ if (
         where=totals[:, None] != 0,
     )
 
-
     entropy = -np.sum(
         np.where(
             proportions > 0,
@@ -2249,11 +2080,9 @@ if (
         axis=1,
     )
 
-
     max_entropy = np.log(
         len(order_columns)
     )
-
 
     diversification_df[
         "DiversificationScore"
@@ -2267,19 +2096,16 @@ if (
         0,
     )
 
-
     average_diversification = (
         diversification_df[
             "DiversificationScore"
         ].mean()
     )
 
-
     st.metric(
-        "🌐 Average Channel Diversification Score",
+        "🔀 Average Channel Diversification Score",
         f"{average_diversification:.1f}/100",
     )
-
 
     fig_diversification = px.histogram(
         diversification_df,
@@ -2287,17 +2113,15 @@ if (
         nbins=20,
         title="Distribution of Channel Diversification Scores",
         color_discrete_sequence=[
-            "#6366F1"
+            "#6366f1"
         ],
     )
 
-
     fig_diversification.update_layout(
         template="plotly_white",
-        xaxis_title="Diversification Score",
-        yaxis_title="Number of Restaurants",
+        plot_bgcolor="white",
+        paper_bgcolor="rgba(0,0,0,0)",
     )
-
 
     st.plotly_chart(
         fig_diversification,
@@ -2339,13 +2163,11 @@ if growth_col:
         }
     )
 
-
     st.dataframe(
         growth_summary,
         use_container_width=True,
         hide_index=True,
     )
-
 
     st.info(
         "The dataset does not contain a time dimension. "
@@ -2417,7 +2239,6 @@ if monthly_orders_col:
         if column in df.columns
     ]
 
-
     if available_order_columns:
 
         calculated_orders = (
@@ -2425,14 +2246,12 @@ if monthly_orders_col:
             .sum(axis=1)
         )
 
-
         mismatches = int(
             (
                 calculated_orders
                 != df[monthly_orders_col]
             ).sum()
         )
-
 
         validation_results.append(
             {
@@ -2495,36 +2314,44 @@ st.subheader("🔎 Key Findings")
 
 st.markdown(
     f"""
-    <div class="recommendation">
-        <strong>📦 Dominant Channel:</strong>
-        {dominant_channel}, with approximately
-        <strong>{dominant_orders:,.0f} orders</strong>.
-    </div>
+    <div class="info-box">
 
-    <div class="recommendation">
-        <strong>🚚 Delivery Contribution:</strong>
-        Delivery channels account for approximately
-        <strong>{delivery_share:.1f}%</strong> of orders.
-    </div>
+    <ul>
 
-    <div class="recommendation">
-        <strong>⚠️ Aggregator Dependence:</strong>
-        Uber Eats and DoorDash together account for
-        approximately <strong>{aggregator_dependence:.1f}%</strong>
-        of orders.
-    </div>
+        <li>
+            <strong>Dominant channel:</strong>
+            {dominant_channel}, with approximately
+            <strong>{dominant_orders:,.0f} orders</strong>.
+        </li>
 
-    <div class="recommendation">
-        <strong>🏪 In-Store Reliance:</strong>
-        In-Store contributes approximately
-        <strong>{in_store_share:.1f}%</strong> of orders.
-    </div>
+        <li>
+            <strong>Delivery contribution:</strong>
+            delivery channels account for approximately
+            <strong>{delivery_share:.1f}%</strong> of orders.
+        </li>
 
-    <div class="recommendation">
-        <strong>🚀 Projected Orders:</strong>
-        Using the supplied GrowthFactor, the next-month
-        scenario is approximately
-        <strong>{projected_orders:,.0f} orders</strong>.
+        <li>
+            <strong>Aggregator dependence:</strong>
+            Uber Eats and DoorDash together account for
+            approximately <strong>{aggregator_dependence:.1f}%</strong>
+            of orders.
+        </li>
+
+        <li>
+            <strong>In-store reliance:</strong>
+            In-Store contributes approximately
+            <strong>{in_store_share:.1f}%</strong> of orders.
+        </li>
+
+        <li>
+            <strong>Projected orders:</strong>
+            using the supplied GrowthFactor, the next-month
+            scenario is approximately
+            <strong>{projected_orders:,.0f} orders</strong>.
+        </li>
+
+    </ul>
+
     </div>
     """,
     unsafe_allow_html=True,
@@ -2547,12 +2374,28 @@ recommendations = [
 ]
 
 
-for recommendation in recommendations:
+for index, recommendation in enumerate(
+    recommendations,
+    start=1
+):
 
     st.markdown(
         f"""
-        <div class="recommendation">
-            💡 {recommendation}
+        <div style="
+            background: white;
+            border: 1px solid #e0e7ff;
+            border-left: 4px solid #6366f1;
+            padding: 13px 17px;
+            margin: 8px 0;
+            border-radius: 9px;
+            box-shadow: 0 3px 10px rgba(31,41,91,0.05);
+        ">
+            <strong style="color:#4f46e5;">
+                {index}.
+            </strong>
+            <span style="color:#172033;">
+                {recommendation}
+            </span>
         </div>
         """,
         unsafe_allow_html=True,
@@ -2582,7 +2425,7 @@ with info1:
 with info2:
 
     st.metric(
-        "🧾 Dataset Columns",
+        "📊 Dataset Columns",
         f"{len(df.columns):,}",
     )
 
@@ -2633,11 +2476,13 @@ st.markdown(
             Order Channel Performance and Market Share Analytics
         </p>
 
-        <p>
-            Unified Mentor Project • Interactive Streamlit Analytics Dashboard
+        <p style="font-size:0.85rem;">
+            Unified Mentor Project |
+            Interactive Streamlit Analytics Dashboard
         </p>
 
     </div>
     """,
     unsafe_allow_html=True,
 )
+```
