@@ -15,8 +15,20 @@ st.markdown(
     """
     <style>
     .stApp {
-        background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 42%, #f3e8ff 72%, #fce7f3 100%) !important;
-        color: #1e293b !important;
+        background: #0b1020 !important;
+        color: #f8fafc !important;
+    }
+    [data-testid="stAppViewContainer"] {
+        background: linear-gradient(135deg, #0b1020 0%, #111827 38%, #172554 68%, #24113d 100%) !important;
+    }
+    [data-testid="stHeader"] {
+        background: transparent !important;
+    }
+    .main {
+        background: transparent !important;
+    }
+    .main .block-container {
+        background: transparent !important;
     }
     .main .block-container {
         max-width: 1500px;
@@ -24,11 +36,11 @@ st.markdown(
         padding-bottom: 3rem;
     }
     h1, h2, h3 {
-        color: #172554 !important;
+        color: #f8fafc !important;
         font-weight: 800 !important;
     }
-    p, li {
-        color: #334155 !important;
+    p, li, .stMarkdown, .stCaption, label {
+        color: #e2e8f0 !important;
     }
     .hero-header {
         padding: 32px 36px;
@@ -51,20 +63,20 @@ st.markdown(
         padding: 20px 22px;
         border-radius: 16px;
         margin-bottom: 24px;
-        background: linear-gradient(135deg, #ffffff 0%, #f5f7ff 100%) !important;
-        border: 1px solid #dbe3f0 !important;
+        background: linear-gradient(135deg, #172033 0%, #1e293b 100%) !important;
+        border: 1px solid #334155 !important;
         box-shadow: 0 6px 18px rgba(31, 41, 91, 0.07);
-        color: #172033 !important;
+        color: #f8fafc !important;
     }
     .info-box strong {
-        color: #3730a3 !important;
+        color: #a5b4fc !important;
     }
     .info-box p, .info-box li {
-        color: #334155 !important;
+        color: #cbd5e1 !important;
     }
     [data-testid="stMetric"] {
-        background: linear-gradient(145deg, #ffffff 0%, #f8faff 100%) !important;
-        border: 1px solid #dce3f0 !important;
+        background: linear-gradient(145deg, #172033 0%, #1e293b 100%) !important;
+        border: 1px solid #334155 !important;
         border-radius: 16px !important;
         padding: 20px !important;
         min-height: 120px;
@@ -72,21 +84,21 @@ st.markdown(
     }
     [data-testid="stMetricLabel"],
     [data-testid="stMetricLabel"] * {
-        color: #64748b !important;
+        color: #cbd5e1 !important;
         font-weight: 600 !important;
     }
     [data-testid="stMetricValue"],
     [data-testid="stMetricValue"] * {
-        color: #172554 !important;
+        color: #ffffff !important;
         font-weight: 800 !important;
     }
     [data-testid="stMetricDelta"],
     [data-testid="stMetricDelta"] * {
-        color: #4f46e5 !important;
+        color: #a5b4fc !important;
         font-weight: 600 !important;
     }
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #0f172a 0%, #172554 48%, #312e81 100%) !important;
+        background: linear-gradient(180deg, #3b0764 0%, #581c87 52%, #7e22ce 100%) !important;
         border-right: 1px solid #334155 !important;
     }
     [data-testid="stSidebar"] h1,
@@ -99,8 +111,8 @@ st.markdown(
         color: #cbd5e1 !important;
     }
     [data-testid="stSidebar"] [data-baseweb="select"] > div {
-        background: #ffffff !important;
-        border: 1px solid #cbd5e1 !important;
+        background: #f8fafc !important;
+        border: 1px solid #c4b5fd !important;
         border-radius: 10px !important;
     }
     [data-testid="stSidebar"] [data-baseweb="select"] *,
@@ -139,20 +151,20 @@ st.markdown(
         font-weight: 600 !important;
     }
     [data-testid="stDataFrame"] {
-        background: #ffffff !important;
-        border: 1px solid #dce3f0 !important;
+        background: #111827 !important;
+        border: 1px solid #334155 !important;
         border-radius: 12px !important;
         overflow: hidden !important;
     }
     [data-testid="stExpander"] {
-        background: #ffffff !important;
-        border: 1px solid #dce3f0 !important;
+        background: #172033 !important;
+        border: 1px solid #334155 !important;
         border-radius: 12px !important;
         box-shadow: 0 4px 14px rgba(31, 41, 91, 0.06);
     }
     [data-testid="stExpander"] summary,
     [data-testid="stExpander"] summary * {
-        color: #172554 !important;
+        color: #f8fafc !important;
         font-weight: 700 !important;
     }
     [data-testid="stAlert"] {
@@ -160,7 +172,7 @@ st.markdown(
     }
     [data-testid="stAlert"] p,
     [data-testid="stAlert"] div {
-        color: #172033 !important;
+        color: #e2e8f0 !important;
     }
     .risk-high, .risk-medium, .risk-low {
         padding: 15px 18px;
