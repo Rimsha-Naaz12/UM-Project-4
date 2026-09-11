@@ -1,9 +1,9 @@
 from pathlib import Path
 
-import pandas as pd
 import numpy as np
-import streamlit as st
+import pandas as pd
 import plotly.express as px
+import streamlit as st
 
 
 # ============================================================
@@ -14,7 +14,7 @@ st.set_page_config(
     page_title="SkyCity Auckland | Channel Analytics",
     page_icon="📊",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
 )
 
 
@@ -25,61 +25,236 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-        .main {
-            padding-top: 1rem;
-        }
 
-        .block-container {
-            padding-top: 1.5rem;
-            padding-bottom: 2rem;
-        }
+    /* ========================================================
+       MAIN PAGE
+       ======================================================== */
 
-        h1 {
-            font-weight: 700;
-        }
+    .main {
+        padding-top: 1rem;
+    }
 
-        h2, h3 {
-            font-weight: 600;
-        }
+    .block-container {
+        padding-top: 1.5rem;
+        padding-bottom: 2rem;
+    }
 
-        [data-testid="stMetric"] {
-            background-color: #f8f9fa;
-            border: 1px solid #e5e7eb;
-            padding: 15px;
-            border-radius: 10px;
-        }
 
-        .info-box {
-            padding: 15px;
-            border-radius: 10px;
-            background-color: #f3f6fa;
-            border: 1px solid #d9e2ec;
-            margin-bottom: 15px;
-        }
+    /* ========================================================
+       HEADINGS
+       ======================================================== */
 
-        .risk-high {
-            padding: 12px;
-            border-radius: 8px;
-            background-color: #ffe5e5;
-            border-left: 5px solid #d62728;
-        }
+    h1 {
+        font-weight: 700 !important;
+    }
 
-        .risk-medium {
-            padding: 12px;
-            border-radius: 8px;
-            background-color: #fff4d6;
-            border-left: 5px solid #ff9900;
-        }
+    h2,
+    h3 {
+        font-weight: 600 !important;
+    }
 
-        .risk-low {
-            padding: 12px;
-            border-radius: 8px;
-            background-color: #e6f7e6;
-            border-left: 5px solid #2ca02c;
-        }
+
+    /* ========================================================
+       KPI METRIC BOXES
+       ======================================================== */
+
+    [data-testid="stMetric"] {
+        background-color: #ffffff !important;
+        border: 1px solid #d9d9d9 !important;
+        padding: 18px !important;
+        border-radius: 10px !important;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    [data-testid="stMetricLabel"] {
+        color: #333333 !important;
+    }
+
+    [data-testid="stMetricLabel"] * {
+        color: #333333 !important;
+    }
+
+    [data-testid="stMetricValue"] {
+        color: #111111 !important;
+    }
+
+    [data-testid="stMetricValue"] * {
+        color: #111111 !important;
+    }
+
+    [data-testid="stMetricDelta"] {
+        color: #333333 !important;
+    }
+
+    [data-testid="stMetricDelta"] * {
+        color: #333333 !important;
+    }
+
+
+    /* ========================================================
+       GENERAL TEXT
+       ======================================================== */
+
+    .stMarkdown p {
+        color: #222222;
+    }
+
+    .stMarkdown li {
+        color: #222222;
+    }
+
+
+    /* ========================================================
+       INFORMATION BOX
+       ======================================================== */
+
+    .info-box {
+        padding: 16px;
+        border-radius: 10px;
+        background-color: #f3f6fa !important;
+        border: 1px solid #d9e2ec !important;
+        margin-bottom: 15px;
+        color: #222222 !important;
+    }
+
+    .info-box p {
+        color: #222222 !important;
+    }
+
+
+    /* ========================================================
+       EXPANDERS
+       ======================================================== */
+
+    [data-testid="stExpander"] {
+        background-color: #ffffff !important;
+        border: 1px solid #d9d9d9 !important;
+        border-radius: 10px !important;
+    }
+
+    [data-testid="stExpander"] summary {
+        color: #222222 !important;
+    }
+
+    [data-testid="stExpander"] summary p {
+        color: #222222 !important;
+    }
+
+    [data-testid="stExpander"] div {
+        color: #222222;
+    }
+
+
+    /* ========================================================
+       DATAFRAME / TABLE TEXT
+       ======================================================== */
+
+    [data-testid="stDataFrame"] {
+        color: #222222 !important;
+    }
+
+
+    /* ========================================================
+       SELECTBOX / MULTISELECT
+       ======================================================== */
+
+    [data-testid="stMultiSelect"] label {
+        color: #222222 !important;
+    }
+
+    [data-testid="stSelectbox"] label {
+        color: #222222 !important;
+    }
+
+
+    /* ========================================================
+       ALERTS
+       ======================================================== */
+
+    [data-testid="stAlert"] {
+        color: #222222 !important;
+    }
+
+    [data-testid="stAlert"] p {
+        color: #222222 !important;
+    }
+
+
+    /* ========================================================
+       HIGH RISK
+       ======================================================== */
+
+    .risk-high {
+        padding: 12px;
+        border-radius: 8px;
+        background-color: #ffe5e5 !important;
+        border-left: 5px solid #d62728;
+        color: #222222 !important;
+    }
+
+    .risk-high p {
+        color: #222222 !important;
+    }
+
+
+    /* ========================================================
+       MEDIUM RISK
+       ======================================================== */
+
+    .risk-medium {
+        padding: 12px;
+        border-radius: 8px;
+        background-color: #fff4d6 !important;
+        border-left: 5px solid #ff9900;
+        color: #222222 !important;
+    }
+
+    .risk-medium p {
+        color: #222222 !important;
+    }
+
+
+    /* ========================================================
+       LOW RISK
+       ======================================================== */
+
+    .risk-low {
+        padding: 12px;
+        border-radius: 8px;
+        background-color: #e6f7e6 !important;
+        border-left: 5px solid #2ca02c;
+        color: #222222 !important;
+    }
+
+    .risk-low p {
+        color: #222222 !important;
+    }
+
+
+    /* ========================================================
+       SIDEBAR
+       ======================================================== */
+
+    [data-testid="stSidebar"] {
+        background-color: #f7f7f7 !important;
+    }
+
+    [data-testid="stSidebar"] * {
+        color: #222222 !important;
+    }
+
+
+    /* ========================================================
+       BUTTONS
+       ======================================================== */
+
+    .stButton button {
+        color: #222222 !important;
+    }
+
     </style>
     """,
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )
 
 
@@ -108,21 +283,29 @@ def load_data():
 
         if path.exists():
 
-            df = pd.read_csv(path)
+            data = pd.read_csv(path)
 
-            # Remove accidental unnamed columns
-            df = df.loc[:, ~df.columns.str.contains("^Unnamed")]
+            data = data.loc[
+                :,
+                ~data.columns.str.contains(
+                    "^Unnamed",
+                    case=False
+                )
+            ]
 
-            return df
+            return data
 
-    searched_paths = "\n".join(str(path) for path in DATA_PATHS)
+    searched_paths = "\n".join(
+        str(path)
+        for path in DATA_PATHS
+    )
 
     raise FileNotFoundError(
         "Dataset not found.\n\n"
         "The application searched these locations:\n\n"
         f"{searched_paths}\n\n"
-        "Please make sure the CSV file is uploaded to GitHub "
-        "inside the data folder."
+        "Please make sure the CSV file is inside the "
+        "'data' folder of your GitHub repository."
     )
 
 
@@ -130,14 +313,10 @@ df = load_data()
 
 
 # ============================================================
-# HELPER FUNCTIONS
+# HELPER FUNCTION
 # ============================================================
 
 def find_column(possible_names):
-
-    """
-    Finds a column from a list of possible column names.
-    """
 
     for name in possible_names:
 
@@ -147,202 +326,181 @@ def find_column(possible_names):
     return None
 
 
-def numeric_sum(column):
-
-    if column and column in df.columns:
-        return pd.to_numeric(df[column], errors="coerce").fillna(0).sum()
-
-    return 0
-
-
-def safe_percentage(value):
-
-    return f"{value:.1f}%"
-
-
 # ============================================================
-# COLUMN DETECTION
+# IDENTIFY IMPORTANT COLUMNS
 # ============================================================
 
 restaurant_id_col = find_column(
-    ["RestaurantID", "Restaurant Id", "Restaurant_ID"]
+    [
+        "RestaurantID",
+        "Restaurant Id",
+        "Restaurant_ID",
+    ]
 )
 
 restaurant_name_col = find_column(
-    ["RestaurantName", "Restaurant Name", "Restaurant_Name"]
+    [
+        "RestaurantName",
+        "Restaurant Name",
+        "Restaurant_Name",
+    ]
 )
 
 cuisine_col = find_column(
-    ["CuisineType", "Cuisine Type", "Cuisine_Type"]
+    [
+        "CuisineType",
+        "Cuisine Type",
+        "Cuisine_Type",
+    ]
 )
 
 segment_col = find_column(
-    ["Segment"]
+    [
+        "Segment",
+    ]
 )
 
 subregion_col = find_column(
-    ["Subregion", "SubRegion", "Sub Region"]
+    [
+        "Subregion",
+        "SubRegion",
+        "Sub Region",
+    ]
 )
 
 growth_col = find_column(
-    ["GrowthFactor", "Growth Factor", "Growth_Factor"]
+    [
+        "GrowthFactor",
+        "Growth Factor",
+        "Growth_Factor",
+    ]
 )
 
 aov_col = find_column(
-    ["AOV", "AverageOrderValue", "Average Order Value"]
+    [
+        "AOV",
+        "AverageOrderValue",
+        "Average Order Value",
+    ]
 )
 
 monthly_orders_col = find_column(
-    ["MonthlyOrders", "Monthly Orders", "Monthly_Orders"]
-)
-
-delivery_radius_col = find_column(
-    ["DeliveryRadiusKM", "Delivery Radius KM"]
-)
-
-delivery_cost_col = find_column(
-    ["DeliveryCostOrder", "Delivery Cost Order"]
+    [
+        "MonthlyOrders",
+        "Monthly Orders",
+        "Monthly_Orders",
+    ]
 )
 
 
 # ============================================================
-# CHANNEL COLUMN DEFINITIONS
+# CHANNEL DEFINITIONS
 # ============================================================
 
 CHANNELS = {
     "In-Store": {
-        "orders": "InStoreOrders",
-        "revenue": "InStoreRevenue",
-        "profit": "InStoreNetProfit",
+        "orders": [
+            "InStoreOrders",
+            "In-Store Orders",
+            "InStore Order Count",
+        ],
+        "revenue": [
+            "InStoreRevenue",
+            "In-Store Revenue",
+        ],
+        "profit": [
+            "InStoreNetProfit",
+            "In-Store Net Profit",
+        ],
     },
+
     "Uber Eats": {
-        "orders": "UberEatsOrders",
-        "revenue": "UberEatsRevenue",
-        "profit": "UberEatsNetProfit",
+        "orders": [
+            "UberEatsOrders",
+            "Uber Eats Orders",
+            "UberEats Order Count",
+        ],
+        "revenue": [
+            "UberEatsRevenue",
+            "Uber Eats Revenue",
+        ],
+        "profit": [
+            "UberEatsNetProfit",
+            "Uber Eats Net Profit",
+        ],
     },
+
     "DoorDash": {
-        "orders": "DoorDashOrders",
-        "revenue": "DoorDashRevenue",
-        "profit": "DoorDashNetProfit",
+        "orders": [
+            "DoorDashOrders",
+            "DoorDash Orders",
+            "DoorDash Order Count",
+        ],
+        "revenue": [
+            "DoorDashRevenue",
+            "DoorDash Revenue",
+        ],
+        "profit": [
+            "DoorDashNetProfit",
+            "DoorDash Net Profit",
+        ],
     },
+
     "Self-Delivery": {
-        "orders": "SelfDeliveryOrders",
-        "revenue": "SelfDeliveryRevenue",
-        "profit": "SelfDeliveryNetProfit",
+        "orders": [
+            "SelfDeliveryOrders",
+            "Self Delivery Orders",
+            "SelfDelivery Order Count",
+        ],
+        "revenue": [
+            "SelfDeliveryRevenue",
+            "Self Delivery Revenue",
+        ],
+        "profit": [
+            "SelfDeliveryNetProfit",
+            "Self Delivery Net Profit",
+        ],
     },
 }
 
 
-# Try alternative column names if required
-COLUMN_ALIASES = {
+# ============================================================
+# RESOLVE CHANNEL COLUMNS
+# ============================================================
 
-    "InStoreOrders": [
-        "InStoreOrders",
-        "In-Store Orders",
-        "InStore Order Count",
-        "InStore_Order_Count",
-    ],
+def resolve_channel_column(possible_names):
 
-    "UberEatsOrders": [
-        "UberEatsOrders",
-        "Uber Eats Orders",
-        "UberEats Order Count",
-    ],
+    for name in possible_names:
 
-    "DoorDashOrders": [
-        "DoorDashOrders",
-        "DoorDash Orders",
-        "DoorDash Order Count",
-    ],
-
-    "SelfDeliveryOrders": [
-        "SelfDeliveryOrders",
-        "Self Delivery Orders",
-        "SelfDelivery Order Count",
-    ],
-
-    "InStoreRevenue": [
-        "InStoreRevenue",
-        "In-Store Revenue",
-        "InStore Revenue",
-    ],
-
-    "UberEatsRevenue": [
-        "UberEatsRevenue",
-        "Uber Eats Revenue",
-    ],
-
-    "DoorDashRevenue": [
-        "DoorDashRevenue",
-        "DoorDash Revenue",
-    ],
-
-    "SelfDeliveryRevenue": [
-        "SelfDeliveryRevenue",
-        "Self Delivery Revenue",
-    ],
-
-    "InStoreNetProfit": [
-        "InStoreNetProfit",
-        "In-Store Net Profit",
-    ],
-
-    "UberEatsNetProfit": [
-        "UberEatsNetProfit",
-        "Uber Eats Net Profit",
-    ],
-
-    "DoorDashNetProfit": [
-        "DoorDashNetProfit",
-        "DoorDash Net Profit",
-    ],
-
-    "SelfDeliveryNetProfit": [
-        "SelfDeliveryNetProfit",
-        "Self Delivery Net Profit",
-    ],
-}
-
-
-def resolve_column(column_name):
-
-    if column_name in df.columns:
-        return column_name
-
-    for alternative in COLUMN_ALIASES.get(column_name, []):
-
-        if alternative in df.columns:
-            return alternative
+        if name in df.columns:
+            return name
 
     return None
 
 
-# Resolve actual columns
 for channel in CHANNELS:
 
-    CHANNELS[channel]["orders"] = resolve_column(
+    CHANNELS[channel]["orders"] = resolve_channel_column(
         CHANNELS[channel]["orders"]
     )
 
-    CHANNELS[channel]["revenue"] = resolve_column(
+    CHANNELS[channel]["revenue"] = resolve_channel_column(
         CHANNELS[channel]["revenue"]
     )
 
-    CHANNELS[channel]["profit"] = resolve_column(
+    CHANNELS[channel]["profit"] = resolve_channel_column(
         CHANNELS[channel]["profit"]
     )
 
 
 # ============================================================
-# NUMERIC CONVERSION
+# CONVERT NUMERIC COLUMNS
 # ============================================================
 
 numeric_columns = [
-    monthly_orders_col,
     growth_col,
     aov_col,
-    delivery_radius_col,
-    delivery_cost_col,
+    monthly_orders_col,
 ]
 
 for channel in CHANNELS:
@@ -367,94 +525,31 @@ for column in numeric_columns:
 
 
 # ============================================================
-# CHANNEL ORDER TOTALS
-# ============================================================
-
-channel_order_totals = {}
-
-for channel, columns in CHANNELS.items():
-
-    order_col = columns["orders"]
-
-    if order_col:
-
-        channel_order_totals[channel] = df[order_col].sum()
-
-    else:
-
-        channel_order_totals[channel] = 0
-
-
-total_orders = sum(channel_order_totals.values())
-
-
-# ============================================================
-# CHANNEL REVENUE TOTALS
-# ============================================================
-
-channel_revenue_totals = {}
-
-for channel, columns in CHANNELS.items():
-
-    revenue_col = columns["revenue"]
-
-    if revenue_col:
-
-        channel_revenue_totals[channel] = df[revenue_col].sum()
-
-    else:
-
-        channel_revenue_totals[channel] = 0
-
-
-total_revenue = sum(channel_revenue_totals.values())
-
-
-# ============================================================
-# CHANNEL PROFIT TOTALS
-# ============================================================
-
-channel_profit_totals = {}
-
-for channel, columns in CHANNELS.items():
-
-    profit_col = columns["profit"]
-
-    if profit_col:
-
-        channel_profit_totals[channel] = df[profit_col].sum()
-
-    else:
-
-        channel_profit_totals[channel] = 0
-
-
-total_profit = sum(channel_profit_totals.values())
-
-
-# ============================================================
 # SIDEBAR
 # ============================================================
 
 st.sidebar.title("🎛️ Dashboard Filters")
 
 st.sidebar.markdown(
-    "Use the filters below to explore SkyCity Auckland's "
-    "restaurant and bar order-channel performance."
+    "Use the filters below to explore order-channel "
+    "performance across SkyCity Auckland."
 )
 
 
-# Subregion filter
+# Subregion
 if subregion_col:
 
     subregions = sorted(
-        df[subregion_col].dropna().astype(str).unique()
+        df[subregion_col]
+        .dropna()
+        .astype(str)
+        .unique()
     )
 
     selected_subregions = st.sidebar.multiselect(
         "Subregion",
         subregions,
-        default=subregions
+        default=subregions,
     )
 
 else:
@@ -462,17 +557,20 @@ else:
     selected_subregions = []
 
 
-# Cuisine filter
+# Cuisine
 if cuisine_col:
 
     cuisines = sorted(
-        df[cuisine_col].dropna().astype(str).unique()
+        df[cuisine_col]
+        .dropna()
+        .astype(str)
+        .unique()
     )
 
     selected_cuisines = st.sidebar.multiselect(
         "Cuisine",
         cuisines,
-        default=cuisines
+        default=cuisines,
     )
 
 else:
@@ -480,17 +578,20 @@ else:
     selected_cuisines = []
 
 
-# Segment filter
+# Segment
 if segment_col:
 
     segments = sorted(
-        df[segment_col].dropna().astype(str).unique()
+        df[segment_col]
+        .dropna()
+        .astype(str)
+        .unique()
     )
 
     selected_segments = st.sidebar.multiselect(
         "Segment",
         segments,
-        default=segments
+        default=segments,
     )
 
 else:
@@ -498,10 +599,11 @@ else:
     selected_segments = []
 
 
+# Channels
 selected_channels = st.sidebar.multiselect(
     "Channels",
     list(CHANNELS.keys()),
-    default=list(CHANNELS.keys())
+    default=list(CHANNELS.keys()),
 )
 
 
@@ -515,38 +617,36 @@ filtered_df = df.copy()
 if subregion_col and selected_subregions:
 
     filtered_df = filtered_df[
-        filtered_df[subregion_col].astype(str).isin(
-            selected_subregions
-        )
+        filtered_df[subregion_col]
+        .astype(str)
+        .isin(selected_subregions)
     ]
 
 
 if cuisine_col and selected_cuisines:
 
     filtered_df = filtered_df[
-        filtered_df[cuisine_col].astype(str).isin(
-            selected_cuisines
-        )
+        filtered_df[cuisine_col]
+        .astype(str)
+        .isin(selected_cuisines)
     ]
 
 
 if segment_col and selected_segments:
 
     filtered_df = filtered_df[
-        filtered_df[segment_col].astype(str).isin(
-            selected_segments
-        )
+        filtered_df[segment_col]
+        .astype(str)
+        .isin(selected_segments)
     ]
 
 
 # ============================================================
-# FILTERED CHANNEL METRICS
+# CALCULATE CHANNEL METRICS
 # ============================================================
 
 filtered_channel_orders = {}
-
 filtered_channel_revenue = {}
-
 filtered_channel_profit = {}
 
 
@@ -613,6 +713,94 @@ filtered_total_profit = sum(
 
 
 # ============================================================
+# CALCULATE KPIs
+# ============================================================
+
+aggregator_orders = (
+    filtered_channel_orders.get("Uber Eats", 0)
+    + filtered_channel_orders.get("DoorDash", 0)
+)
+
+if filtered_total_orders > 0:
+
+    aggregator_dependence = (
+        aggregator_orders
+        / filtered_total_orders
+        * 100
+    )
+
+else:
+
+    aggregator_dependence = 0
+
+
+delivery_orders = (
+    filtered_channel_orders.get("Uber Eats", 0)
+    + filtered_channel_orders.get("DoorDash", 0)
+    + filtered_channel_orders.get("Self-Delivery", 0)
+)
+
+if filtered_total_orders > 0:
+
+    delivery_share = (
+        delivery_orders
+        / filtered_total_orders
+        * 100
+    )
+
+else:
+
+    delivery_share = 0
+
+
+in_store_orders = filtered_channel_orders.get(
+    "In-Store",
+    0
+)
+
+if filtered_total_orders > 0:
+
+    in_store_share = (
+        in_store_orders
+        / filtered_total_orders
+        * 100
+    )
+
+else:
+
+    in_store_share = 0
+
+
+if filtered_total_orders > 0:
+
+    calculated_aov = (
+        filtered_total_revenue
+        / filtered_total_orders
+    )
+
+else:
+
+    calculated_aov = 0
+
+
+if growth_col:
+
+    average_growth = filtered_df[
+        growth_col
+    ].mean()
+
+else:
+
+    average_growth = 0
+
+
+projected_orders = (
+    filtered_total_orders
+    * (1 + average_growth / 100)
+)
+
+
+# ============================================================
 # HEADER
 # ============================================================
 
@@ -627,13 +815,15 @@ st.subheader(
 st.markdown(
     """
     <div class="info-box">
-    This interactive dashboard analyses order volume, channel share,
-    revenue, profitability, geographic preferences, cuisine patterns,
-    and dependency risk across In-Store, Uber Eats, DoorDash,
-    and Self-Delivery channels.
+        <strong>Dashboard Overview</strong><br><br>
+        This interactive dashboard analyses order volume,
+        channel market share, revenue, profitability,
+        geographic preferences, cuisine patterns and
+        aggregator dependency across SkyCity Auckland's
+        restaurant and bar market.
     </div>
     """,
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )
 
 
@@ -641,7 +831,7 @@ st.markdown(
 # KPI SECTION
 # ============================================================
 
-st.markdown("## 📌 Key Performance Indicators")
+st.header("📌 Key Performance Indicators")
 
 
 kpi1, kpi2, kpi3, kpi4 = st.columns(4)
@@ -651,7 +841,7 @@ with kpi1:
 
     st.metric(
         "Monthly Orders",
-        f"{filtered_total_orders:,.0f}"
+        f"{filtered_total_orders:,.0f}",
     )
 
 
@@ -659,7 +849,7 @@ with kpi2:
 
     st.metric(
         "Revenue",
-        f"${filtered_total_revenue:,.0f}"
+        f"${filtered_total_revenue:,.0f}",
     )
 
 
@@ -667,32 +857,15 @@ with kpi3:
 
     st.metric(
         "Net Profit",
-        f"${filtered_total_profit:,.0f}"
+        f"${filtered_total_profit:,.0f}",
     )
-
-
-# Aggregator dependence
-aggregator_orders = (
-    filtered_channel_orders.get("Uber Eats", 0)
-    + filtered_channel_orders.get("DoorDash", 0)
-)
-
-if filtered_total_orders > 0:
-
-    aggregator_dependence = (
-        aggregator_orders / filtered_total_orders * 100
-    )
-
-else:
-
-    aggregator_dependence = 0
 
 
 with kpi4:
 
     st.metric(
         "Aggregator Dependence",
-        f"{aggregator_dependence:.1f}%"
+        f"{aggregator_dependence:.1f}%",
     )
 
 
@@ -700,98 +873,34 @@ with kpi4:
 # SECOND KPI ROW
 # ============================================================
 
-st.markdown("## 📈 Additional Indicators")
+st.subheader("📈 Additional Indicators")
 
 
 kpi5, kpi6, kpi7, kpi8 = st.columns(4)
-
-
-# Delivery share
-delivery_orders = (
-    filtered_channel_orders.get("Uber Eats", 0)
-    + filtered_channel_orders.get("DoorDash", 0)
-    + filtered_channel_orders.get("Self-Delivery", 0)
-)
-
-if filtered_total_orders:
-
-    delivery_share = (
-        delivery_orders / filtered_total_orders * 100
-    )
-
-else:
-
-    delivery_share = 0
 
 
 with kpi5:
 
     st.metric(
         "Delivery Order Share",
-        f"{delivery_share:.1f}%"
+        f"{delivery_share:.1f}%",
     )
-
-
-# In-store share
-in_store_orders = filtered_channel_orders.get(
-    "In-Store",
-    0
-)
-
-if filtered_total_orders:
-
-    in_store_share = (
-        in_store_orders / filtered_total_orders * 100
-    )
-
-else:
-
-    in_store_share = 0
 
 
 with kpi6:
 
     st.metric(
         "In-Store Reliance",
-        f"{in_store_share:.1f}%"
+        f"{in_store_share:.1f}%",
     )
-
-
-# Average order value
-if filtered_total_orders > 0:
-
-    calculated_aov = (
-        filtered_total_revenue /
-        filtered_total_orders
-    )
-
-else:
-
-    calculated_aov = 0
 
 
 with kpi7:
 
     st.metric(
         "Calculated AOV",
-        f"${calculated_aov:,.2f}"
+        f"${calculated_aov:,.2f}",
     )
-
-
-# Next month scenario
-if growth_col:
-
-    average_growth = filtered_df[growth_col].mean()
-
-else:
-
-    average_growth = 0
-
-
-projected_orders = (
-    filtered_total_orders *
-    (1 + average_growth / 100)
-)
 
 
 with kpi8:
@@ -799,7 +908,7 @@ with kpi8:
     st.metric(
         "Next-Month Order Scenario",
         f"{projected_orders:,.0f}",
-        f"{average_growth:.1f}% growth"
+        f"{average_growth:.1f}% growth",
     )
 
 
@@ -809,20 +918,23 @@ with kpi8:
 
 st.markdown("---")
 
-st.header("1. Channel Overview")
+st.header("1. 📦 Channel Overview")
 
 
 channel_data = pd.DataFrame(
     {
-        "Channel": list(selected_channels),
+        "Channel": selected_channels,
+
         "Orders": [
             filtered_channel_orders[channel]
             for channel in selected_channels
         ],
+
         "Revenue": [
             filtered_channel_revenue[channel]
             for channel in selected_channels
         ],
+
         "Net Profit": [
             filtered_channel_profit[channel]
             for channel in selected_channels
@@ -841,18 +953,17 @@ with col1:
         x="Channel",
         y="Orders",
         title="Monthly Orders by Channel",
-        text_auto=".2s"
+        text_auto=".2s",
     )
 
     fig_orders.update_layout(
         xaxis_title="Order Channel",
         yaxis_title="Orders",
-        showlegend=False
     )
 
     st.plotly_chart(
         fig_orders,
-        use_container_width=True
+        use_container_width=True,
     )
 
 
@@ -863,12 +974,12 @@ with col2:
         names="Channel",
         values="Orders",
         title="Channel Order Share",
-        hole=0.4
+        hole=0.4,
     )
 
     st.plotly_chart(
         fig_share,
-        use_container_width=True
+        use_container_width=True,
     )
 
 
@@ -876,7 +987,7 @@ with col2:
 # REVENUE AND PROFIT
 # ============================================================
 
-st.subheader("Revenue and Net Profit by Channel")
+st.subheader("💰 Revenue and Net Profit by Channel")
 
 
 col3, col4 = st.columns(2)
@@ -889,12 +1000,12 @@ with col3:
         x="Channel",
         y="Revenue",
         title="Revenue by Channel",
-        text_auto=".2s"
+        text_auto=".2s",
     )
 
     st.plotly_chart(
         fig_revenue,
-        use_container_width=True
+        use_container_width=True,
     )
 
 
@@ -905,24 +1016,27 @@ with col4:
         x="Channel",
         y="Net Profit",
         title="Net Profit by Channel",
-        text_auto=".2s"
+        text_auto=".2s",
     )
 
     st.plotly_chart(
         fig_profit,
-        use_container_width=True
+        use_container_width=True,
     )
 
 
 # ============================================================
-# CHANNEL PROFITABILITY
+# PROFIT MARGIN
 # ============================================================
 
 channel_data["Profit Margin %"] = np.where(
     channel_data["Revenue"] > 0,
-    channel_data["Net Profit"]
-    / channel_data["Revenue"] * 100,
-    0
+    (
+        channel_data["Net Profit"]
+        / channel_data["Revenue"]
+        * 100
+    ),
+    0,
 )
 
 
@@ -931,16 +1045,18 @@ fig_margin = px.bar(
     x="Channel",
     y="Profit Margin %",
     title="Net Profit Margin by Channel",
-    text_auto=".1f"
+    text_auto=".1f",
 )
+
 
 fig_margin.update_layout(
     yaxis_title="Profit Margin (%)"
 )
 
+
 st.plotly_chart(
     fig_margin,
-    use_container_width=True
+    use_container_width=True,
 )
 
 
@@ -950,24 +1066,32 @@ st.plotly_chart(
 
 st.markdown("---")
 
-st.header("2. Geographic / Subregion Analysis")
+st.header("2. 🗺️ Geographic / Subregion Analysis")
 
 
 if subregion_col:
 
+    available_channels = [
+        channel
+        for channel in selected_channels
+        if CHANNELS[channel]["orders"]
+    ]
+
+
+    aggregation_dict = {}
+
+    for channel in available_channels:
+
+        aggregation_dict[channel] = (
+            CHANNELS[channel]["orders"],
+            "sum",
+        )
+
+
     subregion_channel = (
         filtered_df
         .groupby(subregion_col)
-        .agg(
-            **{
-                channel: (
-                    CHANNELS[channel]["orders"],
-                    "sum"
-                )
-                for channel in selected_channels
-                if CHANNELS[channel]["orders"]
-            }
-        )
+        .agg(**aggregation_dict)
         .reset_index()
     )
 
@@ -978,17 +1102,15 @@ if subregion_col:
             "Channel Order Volume by Subregion"
         )
 
-        melt_columns = [
-            channel
-            for channel in selected_channels
-            if channel in subregion_channel.columns
-        ]
 
-        melted_subregion = subregion_channel.melt(
-            id_vars=[subregion_col],
-            value_vars=melt_columns,
-            var_name="Channel",
-            value_name="Orders"
+        melted_subregion = (
+            subregion_channel
+            .melt(
+                id_vars=[subregion_col],
+                value_vars=available_channels,
+                var_name="Channel",
+                value_name="Orders",
+            )
         )
 
 
@@ -998,60 +1120,74 @@ if subregion_col:
             y="Orders",
             color="Channel",
             barmode="group",
-            title="Orders by Subregion and Channel"
+            title="Orders by Subregion and Channel",
         )
+
 
         fig_subregion.update_layout(
             xaxis_title="Subregion",
-            yaxis_title="Orders"
+            yaxis_title="Orders",
         )
+
 
         st.plotly_chart(
             fig_subregion,
-            use_container_width=True
+            use_container_width=True,
         )
 
 
-        # Heatmap
-        heatmap_data = subregion_channel.set_index(
-            subregion_col
-        )[melt_columns]
+        st.subheader(
+            "Subregion Channel Heatmap"
+        )
+
+
+        heatmap_data = (
+            subregion_channel
+            .set_index(subregion_col)
+            [available_channels]
+        )
 
 
         fig_heatmap = px.imshow(
             heatmap_data,
             text_auto=".2s",
             aspect="auto",
-            title="Subregion Channel Heatmap"
+            title="Subregion Channel Heatmap",
         )
+
 
         st.plotly_chart(
             fig_heatmap,
-            use_container_width=True
+            use_container_width=True,
         )
 
-
-        # Dominant channel
-        dominance = heatmap_data.idxmax(axis=1)
-
-        dominance_table = pd.DataFrame(
-            {
-                "Subregion": dominance.index,
-                "Dominant Channel": dominance.values,
-                "Orders": heatmap_data.max(axis=1).values
-            }
-        )
 
         st.subheader(
             "Dominant Channel by Subregion"
         )
 
+
+        dominance = heatmap_data.idxmax(
+            axis=1
+        )
+
+
+        dominance_table = pd.DataFrame(
+            {
+                "Subregion": dominance.index,
+                "Dominant Channel": dominance.values,
+                "Orders": heatmap_data.max(
+                    axis=1
+                ).values,
+            }
+        )
+
+
         st.dataframe(
             dominance_table,
             use_container_width=True,
-            hide_index=True
+            hide_index=True,
         )
-
 
 else:
 
@@ -1066,24 +1202,32 @@ else:
 
 st.markdown("---")
 
-st.header("3. Cuisine vs Channel Analysis")
+st.header("3. 🍽️ Cuisine vs Channel Analysis")
 
 
 if cuisine_col:
 
+    available_channels = [
+        channel
+        for channel in selected_channels
+        if CHANNELS[channel]["orders"]
+    ]
+
+
+    aggregation_dict = {}
+
+    for channel in available_channels:
+
+        aggregation_dict[channel] = (
+            CHANNELS[channel]["orders"],
+            "sum",
+        )
+
+
     cuisine_channel = (
         filtered_df
         .groupby(cuisine_col)
-        .agg(
-            **{
-                channel: (
-                    CHANNELS[channel]["orders"],
-                    "sum"
-                )
-                for channel in selected_channels
-                if CHANNELS[channel]["orders"]
-            }
-        )
+        .agg(**aggregation_dict)
         .reset_index()
     )
 
@@ -1091,7 +1235,7 @@ if cuisine_col:
     cuisine_melt = cuisine_channel.melt(
         id_vars=[cuisine_col],
         var_name="Channel",
-        value_name="Orders"
+        value_name="Orders",
     )
 
 
@@ -1101,27 +1245,31 @@ if cuisine_col:
         y="Orders",
         color="Channel",
         barmode="stack",
-        title="Cuisine Channel Mix"
+        title="Cuisine Channel Mix",
     )
+
 
     fig_cuisine.update_layout(
         xaxis_title="Cuisine",
-        yaxis_title="Orders"
+        yaxis_title="Orders",
     )
+
 
     st.plotly_chart(
         fig_cuisine,
-        use_container_width=True
+        use_container_width=True,
     )
 
 
-    # Cuisine dominant channel
-    cuisine_pivot = cuisine_channel.set_index(
-        cuisine_col
+    cuisine_pivot = (
+        cuisine_channel
+        .set_index(cuisine_col)
     )
 
-    cuisine_dominance = cuisine_pivot.idxmax(
-        axis=1
+
+    cuisine_dominance = (
+        cuisine_pivot
+        .idxmax(axis=1)
     )
 
 
@@ -1129,7 +1277,9 @@ if cuisine_col:
         {
             "Cuisine": cuisine_dominance.index,
             "Dominant Channel": cuisine_dominance.values,
-            "Orders": cuisine_pivot.max(axis=1).values
+            "Orders": cuisine_pivot.max(
+                axis=1
+            ).values,
         }
     )
 
@@ -1138,12 +1288,12 @@ if cuisine_col:
         "Dominant Channel by Cuisine"
     )
 
+
     st.dataframe(
         cuisine_table,
         use_container_width=True,
-        hide_index=True
+        hide_index=True,
     )
-
 
 else:
 
@@ -1158,24 +1308,32 @@ else:
 
 st.markdown("---")
 
-st.header("4. Restaurant Segment Analysis")
+st.header("4. 🏪 Restaurant Segment Analysis")
 
 
 if segment_col:
 
+    available_channels = [
+        channel
+        for channel in selected_channels
+        if CHANNELS[channel]["orders"]
+    ]
+
+
+    aggregation_dict = {}
+
+    for channel in available_channels:
+
+        aggregation_dict[channel] = (
+            CHANNELS[channel]["orders"],
+            "sum",
+        )
+
+
     segment_channel = (
         filtered_df
         .groupby(segment_col)
-        .agg(
-            **{
-                channel: (
-                    CHANNELS[channel]["orders"],
-                    "sum"
-                )
-                for channel in selected_channels
-                if CHANNELS[channel]["orders"]
-            }
-        )
+        .agg(**aggregation_dict)
         .reset_index()
     )
 
@@ -1183,7 +1341,7 @@ if segment_col:
     segment_melt = segment_channel.melt(
         id_vars=[segment_col],
         var_name="Channel",
-        value_name="Orders"
+        value_name="Orders",
     )
 
 
@@ -1193,14 +1351,14 @@ if segment_col:
         y="Orders",
         color="Channel",
         barmode="group",
-        title="Order Channels by Restaurant Segment"
+        title="Order Channels by Restaurant Segment",
     )
+
 
     st.plotly_chart(
         fig_segment,
-        use_container_width=True
+        use_container_width=True,
     )
-
 
 else:
 
@@ -1210,19 +1368,19 @@ else:
 
 
 # ============================================================
-# DEPENDENCY RISK
+# AGGREGATOR DEPENDENCY
 # ============================================================
 
 st.markdown("---")
 
-st.header("5. Aggregator Dependency Risk")
+st.header("5. ⚠️ Aggregator Dependency Risk")
 
 
 st.markdown(
     """
-    **Risk threshold:** a restaurant is flagged as high dependency
-    when Uber Eats + DoorDash account for **70% or more of total
-    monthly orders**.
+    **Risk threshold:** a restaurant is classified as
+    **High Risk** when Uber Eats + DoorDash account for
+    **70% or more of total monthly orders**.
     """
 )
 
@@ -1231,10 +1389,15 @@ dependency_df = filtered_df.copy()
 
 
 uber_col = CHANNELS["Uber Eats"]["orders"]
+
 doordash_col = CHANNELS["DoorDash"]["orders"]
 
 
-if uber_col and doordash_col and monthly_orders_col:
+if (
+    uber_col
+    and doordash_col
+    and monthly_orders_col
+):
 
     dependency_df["AggregatorOrders"] = (
         dependency_df[uber_col]
@@ -1244,38 +1407,54 @@ if uber_col and doordash_col and monthly_orders_col:
 
     dependency_df["AggregatorDependence"] = np.where(
         dependency_df[monthly_orders_col] > 0,
+
         dependency_df["AggregatorOrders"]
-        / dependency_df[monthly_orders_col] * 100,
-        0
+        / dependency_df[monthly_orders_col]
+        * 100,
+
+        0,
     )
 
 
     dependency_df["Risk"] = np.select(
         [
             dependency_df["AggregatorDependence"] >= 70,
+
             dependency_df["AggregatorDependence"] >= 50,
         ],
+
         [
             "High",
+
             "Medium",
         ],
-        default="Low"
+
+        default="Low",
     )
 
 
-    high_risk_count = (
-        dependency_df["Risk"] == "High"
-    ).sum()
+    high_risk_count = int(
+        (
+            dependency_df["Risk"]
+            == "High"
+        ).sum()
+    )
 
 
-    medium_risk_count = (
-        dependency_df["Risk"] == "Medium"
-    ).sum()
+    medium_risk_count = int(
+        (
+            dependency_df["Risk"]
+            == "Medium"
+        ).sum()
+    )
 
 
-    low_risk_count = (
-        dependency_df["Risk"] == "Low"
-    ).sum()
+    low_risk_count = int(
+        (
+            dependency_df["Risk"]
+            == "Low"
+        ).sum()
+    )
 
 
     r1, r2, r3 = st.columns(3)
@@ -1284,40 +1463,40 @@ if uber_col and doordash_col and monthly_orders_col:
     with r1:
 
         st.metric(
-            "High Risk",
-            f"{high_risk_count:,}"
+            "🔴 High Risk",
+            f"{high_risk_count:,}",
         )
 
 
     with r2:
 
         st.metric(
-            "Medium Risk",
-            f"{medium_risk_count:,}"
+            "🟠 Medium Risk",
+            f"{medium_risk_count:,}",
         )
 
 
     with r3:
 
         st.metric(
-            "Low Risk",
-            f"{low_risk_count:,}"
+            "🟢 Low Risk",
+            f"{low_risk_count:,}",
         )
 
 
-    # Risk chart
     risk_counts = pd.DataFrame(
         {
             "Risk": [
                 "High",
                 "Medium",
-                "Low"
+                "Low",
             ],
+
             "Restaurants": [
                 high_risk_count,
                 medium_risk_count,
-                low_risk_count
-            ]
+                low_risk_count,
+            ],
         }
     )
 
@@ -1327,46 +1506,58 @@ if uber_col and doordash_col and monthly_orders_col:
         x="Risk",
         y="Restaurants",
         title="Restaurant Dependency Risk Distribution",
-        text_auto=True
+        text_auto=True,
     )
 
 
     st.plotly_chart(
         fig_risk,
-        use_container_width=True
+        use_container_width=True,
     )
 
 
-    # Restaurant-level risk table
+    # ========================================================
+    # RESTAURANT RISK TABLE
+    # ========================================================
+
+    st.subheader(
+        "Restaurants with Highest Aggregator Dependence"
+    )
+
 
     display_columns = []
 
 
     if restaurant_id_col:
+
         display_columns.append(
             restaurant_id_col
         )
 
 
     if restaurant_name_col:
+
         display_columns.append(
             restaurant_name_col
         )
 
 
     if cuisine_col:
+
         display_columns.append(
             cuisine_col
         )
 
 
     if segment_col:
+
         display_columns.append(
             segment_col
         )
 
 
     if subregion_col:
+
         display_columns.append(
             subregion_col
         )
@@ -1377,7 +1568,7 @@ if uber_col and doordash_col and monthly_orders_col:
             monthly_orders_col,
             "AggregatorOrders",
             "AggregatorDependence",
-            "Risk"
+            "Risk",
         ]
     )
 
@@ -1385,35 +1576,33 @@ if uber_col and doordash_col and monthly_orders_col:
     display_columns = [
         column
         for column in display_columns
-        if column and column in dependency_df.columns
+        if column
+        and column in dependency_df.columns
     ]
 
 
-    risk_table = dependency_df[
-        display_columns
-    ].sort_values(
-        "AggregatorDependence",
-        ascending=False
-    )
-
-
-    st.subheader(
-        "Restaurants with Highest Aggregator Dependence"
+    risk_table = (
+        dependency_df[
+            display_columns
+        ]
+        .sort_values(
+            "AggregatorDependence",
+            ascending=False,
+        )
     )
 
 
     st.dataframe(
         risk_table.head(100),
         use_container_width=True,
-        hide_index=True
+        hide_index=True,
     )
-
 
 else:
 
     st.warning(
-        "Required order columns for dependency analysis "
-        "were not found."
+        "Required columns for aggregator dependency "
+        "analysis were not found."
     )
 
 
@@ -1423,15 +1612,16 @@ else:
 
 st.markdown("---")
 
-st.header("6. Channel Diversification")
+st.header("6. 🔀 Channel Diversification")
 
 
 st.markdown(
     """
-    The Channel Diversification Score uses normalized Shannon entropy
-    across the four order channels.
+    The Channel Diversification Score uses normalized
+    Shannon entropy across the four order channels.
 
-    **0 = highly concentrated**  
+    **0 = highly concentrated**
+
     **100 = highly diversified**
     """
 )
@@ -1447,7 +1637,10 @@ order_columns = {
 }
 
 
-if len(order_columns) >= 2 and monthly_orders_col:
+if (
+    len(order_columns) >= 2
+    and monthly_orders_col
+):
 
     channel_values = np.column_stack(
         [
@@ -1457,7 +1650,9 @@ if len(order_columns) >= 2 and monthly_orders_col:
     )
 
 
-    totals = channel_values.sum(axis=1)
+    totals = channel_values.sum(
+        axis=1
+    )
 
 
     proportions = np.divide(
@@ -1465,19 +1660,20 @@ if len(order_columns) >= 2 and monthly_orders_col:
         totals[:, None],
         out=np.zeros_like(
             channel_values,
-            dtype=float
+            dtype=float,
         ),
-        where=totals[:, None] != 0
+        where=totals[:, None] != 0,
     )
 
 
     entropy = -np.sum(
         np.where(
             proportions > 0,
-            proportions * np.log(proportions),
-            0
+            proportions
+            * np.log(proportions),
+            0,
         ),
-        axis=1
+        axis=1,
     )
 
 
@@ -1490,8 +1686,12 @@ if len(order_columns) >= 2 and monthly_orders_col:
         "DiversificationScore"
     ] = np.where(
         max_entropy > 0,
-        entropy / max_entropy * 100,
-        0
+
+        entropy
+        / max_entropy
+        * 100,
+
+        0,
     )
 
 
@@ -1504,7 +1704,7 @@ if len(order_columns) >= 2 and monthly_orders_col:
 
     st.metric(
         "Average Channel Diversification Score",
-        f"{average_diversification:.1f}/100"
+        f"{average_diversification:.1f}/100",
     )
 
 
@@ -1512,31 +1712,30 @@ if len(order_columns) >= 2 and monthly_orders_col:
         diversification_df,
         x="DiversificationScore",
         nbins=20,
-        title="Distribution of Channel Diversification Scores"
+        title="Distribution of Channel Diversification Scores",
     )
 
 
     st.plotly_chart(
         fig_diversification,
-        use_container_width=True
+        use_container_width=True,
     )
-
 
 else:
 
     st.warning(
-        "Not enough channel order columns available "
+        "Not enough channel order columns are available "
         "for diversification analysis."
     )
 
 
 # ============================================================
-# GROWTH PROJECTION
+# GROWTH SCENARIO
 # ============================================================
 
 st.markdown("---")
 
-st.header("7. Growth Scenario")
+st.header("7. 📈 Growth Scenario")
 
 
 if growth_col:
@@ -1546,13 +1745,14 @@ if growth_col:
             "Metric": [
                 "Average Growth Factor",
                 "Current Monthly Orders",
-                "Projected Monthly Orders"
+                "Projected Monthly Orders",
             ],
+
             "Value": [
                 f"{average_growth:.2f}%",
                 f"{filtered_total_orders:,.0f}",
-                f"{projected_orders:,.0f}"
-            ]
+                f"{projected_orders:,.0f}",
+            ],
         }
     )
 
@@ -1560,16 +1760,16 @@ if growth_col:
     st.dataframe(
         growth_summary,
         use_container_width=True,
-        hide_index=True
+        hide_index=True,
     )
 
 
     st.info(
-        "Important: the dataset does not contain a time dimension. "
-        "Therefore, this is a one-month growth scenario using the "
-        "supplied GrowthFactor, not a true historical time-series forecast."
+        "The dataset does not contain a time dimension. "
+        "Therefore, this is a one-month growth scenario "
+        "using the supplied GrowthFactor, not a true "
+        "historical time-series forecast."
     )
-
 
 else:
 
@@ -1579,12 +1779,12 @@ else:
 
 
 # ============================================================
-# DATA VALIDATION
+# DATA QUALITY VALIDATION
 # ============================================================
 
 st.markdown("---")
 
-st.header("8. Data Quality Validation")
+st.header("8. ✅ Data Quality Validation")
 
 
 validation_results = []
@@ -1600,7 +1800,11 @@ validation_results.append(
     {
         "Validation": "Missing Values",
         "Result": missing_values,
-        "Status": "PASS" if missing_values == 0 else "CHECK"
+        "Status": (
+            "PASS"
+            if missing_values == 0
+            else "CHECK"
+        ),
     }
 )
 
@@ -1615,12 +1819,16 @@ validation_results.append(
     {
         "Validation": "Duplicate Rows",
         "Result": duplicate_rows,
-        "Status": "PASS" if duplicate_rows == 0 else "CHECK"
+        "Status": (
+            "PASS"
+            if duplicate_rows == 0
+            else "CHECK"
+        ),
     }
 )
 
 
-# Monthly order reconciliation
+# Channel reconciliation
 if monthly_orders_col:
 
     available_order_columns = [
@@ -1648,13 +1856,16 @@ if monthly_orders_col:
 
         validation_results.append(
             {
-                "Validation": "Channel Orders = Monthly Orders",
+                "Validation":
+                    "Channel Orders = Monthly Orders",
+
                 "Result": mismatches,
+
                 "Status": (
                     "PASS"
                     if mismatches == 0
                     else "CHECK"
-                )
+                ),
             }
         )
 
@@ -1667,7 +1878,7 @@ validation_table = pd.DataFrame(
 st.dataframe(
     validation_table,
     use_container_width=True,
-    hide_index=True
+    hide_index=True,
 )
 
 
@@ -1677,20 +1888,21 @@ st.dataframe(
 
 st.markdown("---")
 
-st.header("9. Executive Insights & Recommendations")
+st.header("9. 💡 Executive Insights & Recommendations")
 
 
-# Determine dominant channel
 if filtered_channel_orders:
 
     dominant_channel = max(
         filtered_channel_orders,
-        key=filtered_channel_orders.get
+        key=filtered_channel_orders.get,
     )
 
-    dominant_orders = filtered_channel_orders[
-        dominant_channel
-    ]
+    dominant_orders = (
+        filtered_channel_orders[
+            dominant_channel
+        ]
+    )
 
 else:
 
@@ -1704,14 +1916,14 @@ st.subheader("Key Findings")
 st.markdown(
     f"""
     - **Dominant channel:** {dominant_channel}, with
-      approximately **{dominant_orders:,.0f} orders** in the selected data.
-    - **Delivery contribution:** delivery channels account for
-      approximately **{delivery_share:.1f}%** of selected orders.
-    - **Aggregator dependence:** Uber Eats and DoorDash together
-      account for approximately **{aggregator_dependence:.1f}%**
-      of selected orders.
-    - **In-store reliance:** In-Store contributes approximately
-      **{in_store_share:.1f}%** of selected orders.
+      approximately **{dominant_orders:,.0f} orders**.
+    - **Delivery contribution:** delivery channels account
+      for approximately **{delivery_share:.1f}%** of orders.
+    - **Aggregator dependence:** Uber Eats and DoorDash
+      together account for approximately
+      **{aggregator_dependence:.1f}%** of orders.
+    - **In-store reliance:** In-Store contributes
+      approximately **{in_store_share:.1f}%** of orders.
     - **Projected orders:** using the supplied GrowthFactor,
       the next-month scenario is approximately
       **{projected_orders:,.0f} orders**.
@@ -1719,17 +1931,19 @@ st.markdown(
 )
 
 
-st.subheader("Strategic Recommendations")
+st.subheader(
+    "Strategic Recommendations"
+)
 
 
 recommendations = [
     "Diversify order channels to reduce dependence on a small number of aggregators.",
     "Monitor restaurants where Uber Eats and DoorDash together exceed the 70% dependency threshold.",
-    "Strengthen direct/self-delivery capabilities where economics and delivery radius support it.",
+    "Strengthen direct and self-delivery capabilities where delivery economics support it.",
     "Use subregion-level channel preferences to tailor marketing and operational strategies.",
-    "Review cuisine-level channel patterns before allocating promotional budgets.",
+    "Use cuisine-level channel patterns when allocating promotional budgets.",
     "Protect profitable in-store demand while using digital channels to expand customer reach.",
-    "Track channel profitability alongside order volume because the largest order channel may not be the most profitable.",
+    "Track profitability alongside order volume because the largest channel may not be the most profitable.",
 ]
 
 
@@ -1746,7 +1960,7 @@ for recommendation in recommendations:
 
 st.markdown("---")
 
-st.header("10. Dataset Information")
+st.header("10. 📋 Dataset Information")
 
 
 info1, info2, info3 = st.columns(3)
@@ -1756,7 +1970,7 @@ with info1:
 
     st.metric(
         "Restaurant Records",
-        f"{len(df):,}"
+        f"{len(df):,}",
     )
 
 
@@ -1764,7 +1978,7 @@ with info2:
 
     st.metric(
         "Dataset Columns",
-        f"{len(df.columns):,}"
+        f"{len(df.columns):,}",
     )
 
 
@@ -1772,23 +1986,27 @@ with info3:
 
     st.metric(
         "Filtered Records",
-        f"{len(filtered_df):,}"
+        f"{len(filtered_df):,}",
     )
 
 
-with st.expander("View Dataset Columns"):
+with st.expander(
+    "🔍 View Dataset Columns"
+):
 
     st.write(
         list(df.columns)
     )
 
 
-with st.expander("View Filtered Data"):
+with st.expander(
+    "📄 View Filtered Data"
+):
 
     st.dataframe(
         filtered_df.head(500),
         use_container_width=True,
-        hide_index=True
+        hide_index=True,
     )
 
 
@@ -1804,6 +2022,6 @@ st.caption(
 )
 
 st.caption(
-    "Developed for Unified Mentor Project | "
+    "Unified Mentor Project | "
     "Interactive Streamlit Analytics Dashboard"
 )
